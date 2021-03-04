@@ -16,7 +16,7 @@ class CreateVendorsTable extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->bigIncrements('pki_vendor_id');
             $table->bigInteger('fki_country_id');
-            $table->bigInteger('fki_currency_id')->nullable();
+            $table->bigInteger('fki_currency_id')->unsigned()->nullable();
             $table->string('vendor', 150)->unique();
             $table->string('reference_name')->nullable();
             $table->string('complete_url')->nullable();

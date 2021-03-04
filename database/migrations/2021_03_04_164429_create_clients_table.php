@@ -15,8 +15,8 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('pki_client_id');
-            $table->bigInteger('fki_country_id')->nullable();
-            $table->bigInteger('fki_currency_id')->nullable();
+            $table->bigInteger('fki_country_id')->unsigned()->nullable();
+            $table->bigInteger('fki_currency_id')->unsigned()->nullable();
             $table->string('client', 150)->unique();
             $table->dateTime('created');
             $table->dateTime('updated');
