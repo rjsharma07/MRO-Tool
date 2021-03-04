@@ -19,6 +19,10 @@ class CreateVendorsTable extends Migration
             $table->bigInteger('fki_currency_id')->nullable();
             $table->string('vendor', 150)->unique();
             $table->string('reference_name')->nullable();
+            $table->string('complete_url')->nullable();
+            $table->string('disqualify_url')->nullable();
+            $table->string('quotafull_url')->nullable();
+            $table->string('quality_term_url')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->boolean('active')->default(1);

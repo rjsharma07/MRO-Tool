@@ -22,8 +22,13 @@ class CreateVendordetailsTable extends Migration
             $table->string('cpi');
             $table->string('loi')->nullable();
             $table->string('ir')->nullable();
-            $table->string('required_completes')->nullable();
-            $table->string('security');
+            $table->string('hits')->default(0);
+            $table->string('required_completes');
+            $table->string('completes')->default(0);
+            $table->string('complete_url')->nullable();
+            $table->string('disqualify_url')->nullable();
+            $table->string('quotafull_url')->nullable();
+            $table->string('quality_term_url')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->index(['fki_vendor_id']);
