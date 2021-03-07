@@ -1,0 +1,17 @@
+.btn-panel {
+    width: 100%;
+    margin: 15px 0px;
+    overflow: hidden;
+}
+.btn-panel button, .btn-panel a {
+    float: right;
+}
+.table-outer {
+    width: 100%;
+}
+.modal-body .nav-item{
+    width: 50%;
+}
+.tab-content {
+    margin: 15px 0px;
+}

@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->dateTime('created');
-            $table->dateTime('updated');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
             $table->boolean('active')->default(1);
             $table->index(['fki_role_id']);
             $table->foreign('fki_role_id')

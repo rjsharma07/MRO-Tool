@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class RegisteredUserController extends Controller
 {
@@ -40,8 +40,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user = User::create([
             'name' => $request->name,
+            'fki_role_id' => 2,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now() 
         ]));
 
         event(new Registered($user));

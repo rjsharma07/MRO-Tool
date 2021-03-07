@@ -17,11 +17,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'fki_role_id',
         'name',
         'email',
         'password',
     ];
-
+    protected $primaryKey = 'pki_user_id';
     /**
      * The attributes that should be hidden for arrays.
      *
