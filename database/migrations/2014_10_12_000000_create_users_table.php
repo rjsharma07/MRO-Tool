@@ -24,12 +24,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
             $table->boolean('active')->default(1);
-            $table->index(['fki_role_id']);
-            $table->foreign('fki_role_id')
-                    ->references('pki_role_id')
-                    ->on('roles')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            
         });
     }
 

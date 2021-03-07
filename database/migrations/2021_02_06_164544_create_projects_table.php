@@ -41,30 +41,7 @@ class CreateProjectsTable extends Migration
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->boolean('status')->default(1);
-            $table->index(['fki_client_id']);
-            $table->foreign('fki_client_id')
-                    ->references('pki_client_id')
-                    ->on('clients')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_user_id']);
-            $table->foreign('fki_user_id')
-                    ->references('pki_user_id')
-                    ->on('users')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_status_id']);
-            $table->foreign('fki_status_id')
-                    ->references('pki_status_id')
-                    ->on('statuses')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_security_id']);
-            $table->foreign('fki_security_id')
-                    ->references('pki_security_id')
-                    ->on('securities')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            
         });
     }
 

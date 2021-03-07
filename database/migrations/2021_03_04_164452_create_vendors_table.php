@@ -26,12 +26,7 @@ class CreateVendorsTable extends Migration
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->boolean('active')->default(1);
-            $table->index(['fki_country_id']);
-            $table->foreign('fki_country_id')
-                    ->references('pki_country_id')
-                    ->on('countries')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            
         });
     }
 

@@ -31,18 +31,7 @@ class CreateVendordetailsTable extends Migration
             $table->string('quality_term_url')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');
-            $table->index(['fki_vendor_id']);
-            $table->foreign('fki_vendor_id')
-                    ->references('pki_vendor_id')
-                    ->on('vendors')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_project_id']);
-            $table->foreign('fki_project_id')
-                    ->references('pki_project_id')
-                    ->on('projects')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            
         });
     }
 

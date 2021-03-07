@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="pcompletel">Complete</label>
-                                <input type="text" class="form-control" name="complete_url" placeholder="Enter Survey Complete Redirect">
+                                <input type="text" class="form-control" name="complete_url" value="{{$project->complete_url}}" placeholder="Enter Survey Complete Redirect">
                             </div>
                         </div>
                         <div class="form-group">

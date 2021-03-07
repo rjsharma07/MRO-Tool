@@ -64,6 +64,8 @@ class ProjectController extends Controller
             $projectOb->save();
             \DB::commit();
             
+            $projectOb->generateLinks($request);
+            
             $project = Project::find($projectOb->pki_project_id);
             
             $currencies = Currency::all();
