@@ -25,10 +25,10 @@ class Project extends Model
         
         $urlToken = Str::uuid();
 
-        $this->complete_url = $request->getHost().$urlToken."/complete";
-        $this->disqualify_url = $request->getHost().$urlToken."/disqualify";
-        $this->quotafull_url = $request->getHost().$urlToken."/quota-full";
-        $this->quality_term_url = $request->getHost().$urlToken."/quality-term";
+        $this->complete_url = $request->getHost()."/survey-response/".$urlToken."/complete";
+        $this->disqualify_url = $request->getHost()."/survey-response/".$urlToken."/disqualify";
+        $this->quotafull_url = $request->getHost()."/survey-response/".$urlToken."/quota-full";
+        $this->quality_term_url = $request->getHost()."/survey-response/".$urlToken."/quality-term";
 
         return $this->save();
     }

@@ -51,15 +51,19 @@ class ProjectController extends Controller
             $projectOb->subject = $request->subject;
             $projectOb->fki_client_id = $request->fki_client_id;
             $projectOb->fki_user_id = $request->fki_user_id;
+
             $projectOb->save();
             \DB::commit();
-
-            $project = Project::find($projectOb->pki_project_id);
+            
+            $project = $projectOb->generateLinks($request);
+            
             return view('project.edit-add',[
                 'project' => $project
             ]);
         }
+
         $project = Project::where('epo', $request->epo)->first();
+        
         return view('project.edit-add',[
             'project' => $project
         ]);

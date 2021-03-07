@@ -33,8 +33,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $primaryKey = 'pki_user_id';
-
     /**
      * The attributes that should be cast to native types.
      *
