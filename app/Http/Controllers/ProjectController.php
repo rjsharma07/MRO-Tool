@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Client;
+use App\Models\Currency;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
@@ -13,10 +16,13 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   $clients = Client::all();
+        $users = User::all();
         $projects = Project::getProjects();
         return view('projects.index', [
-            'projects'=>$projects
+            'projects'=>$projects,
+            'clients'=>$clients,
+            'users'=>$users
         ]);
     }
 
@@ -37,7 +43,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   if($request->new_submit){
+    {   if(isset($request['submit'])){
             $request->validate([
                 'name' => 'required',
                 'subject' => 'required',
@@ -49,24 +55,26 @@ class ProjectController extends Controller
             $projectOb = new Project();
             $projectOb->name = $request->name;
             $projectOb->subject = $request->subject;
+            $projectOb->epo = 'EPO_'.$request->name;
             $projectOb->fki_client_id = $request->fki_client_id;
             $projectOb->fki_user_id = $request->fki_user_id;
+            $projectOb->created = \Carbon\Carbon::now();
+            $projectOb->updated = \Carbon\Carbon::now();
 
             $projectOb->save();
             \DB::commit();
             
-            $project = $projectOb->generateLinks($request);
+            $project = Project::find($projectOb->pki_project_id);
             
-            return view('project.edit-add',[
-                'project' => $project
+            $currencies = Currency::all();
+            $clients = Client::all();
+            
+            return view('projects.edit-add',[
+                'project' => $project,
+                'clients'=>$clients,
+                'currencies'=>$currencies
             ]);
         }
-
-        $project = Project::where('epo', $request->epo)->first();
-        
-        return view('project.edit-add',[
-            'project' => $project
-        ]);
     }
 
     /**

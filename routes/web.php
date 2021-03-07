@@ -22,7 +22,11 @@ Route::get('/dashboard', [ProjectController::class, 'index'])->name('projects')-
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects')->middleware('auth');
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->middleware('auth');
 
-Route::post('/project/create', [ProjectController::class, 'store'])->middleware('auth');
+Route::post('/project/store', [
+    'uses'=>'ProjectController@store',
+    'as'=>'projects.store',
+    'middleware'=>'auth'
+]);
 
 Route::get('/clients', [
     'uses'=>'ClientController@index',

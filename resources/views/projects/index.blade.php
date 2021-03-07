@@ -77,15 +77,16 @@
                     <div class="modal-body">
                         <ul class="nav nav-pills nav-fill">
                             <li class="nav-item">
-                                <a id="new-epo-tab" class="nav-link active" href="#">Active</a>
+                                <a id="new-epo-tab" class="nav-link active" href="#">New EPO</a>
                             </li>
                             <li class="nav-item">
-                                <a id="existing-epo-tab" class="nav-link" href="#">Link</a>
+                                <a id="existing-epo-tab" class="nav-link" href="#">Existing EPO</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active" id="new-epo" role="tabpanel" aria-labelledby="home-tab">
-                                <form method="POST" action="">
+                                <form method="POST" action="{{route('projects.store')}}">
+                                @csrf
                                     <div class="form-group">
                                         <input type="text" name="name" class="form-control" required>
                                     </div>
@@ -93,30 +94,29 @@
                                         <input type="text" name="subject" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <select class="" name="client" required>
-                                            <option value="A">Client A</option>
-                                            <option value="B">Client B</option>
-                                            <option value="C">Client C</option>
-                                            <option value="D">Client D</option>
+                                        <select class="" name="fki_client_id" required>
+                                        @foreach($clients as $client)
+                                            <option value="{{$client->pki_client_id}}">{{$client->client}}</option>
+                                        @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <select class="" name="manager" required>
-                                            <option value="X">Project Manager X</option>
-                                            <option value="Y">Project Manager Y</option>
-                                            <option value="Z">Project Manager Z</option>
+                                        <select class="" name="fki_user_id" required>
+                                        @foreach($users as $user)
+                                            <option value="{{$user->pki_user_id}}">{{$user->name}}</option>
+                                        @endforeach    
                                         </select>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check" name="security" value="alpha">
+                                        <input type="radio" class="form-check" name="security" value="0">
                                         <label>Alpha Secure</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check" name="security" value="unique">
+                                        <input type="radio" class="form-check" name="security" value="1">
                                         <label>Unique Redirect</label>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Add Project</button>
+                                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Add Project</button>
                                         <button type="button" class="btn btn-secondary close-btn-bottom" data-dismiss="modal">Close</button>
                                     </div>
                                 </form>

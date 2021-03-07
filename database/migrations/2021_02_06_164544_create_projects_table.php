@@ -22,7 +22,7 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('fki_status_id')->unsigned()->default(0);
             $table->bigInteger('fki_industrytype_id')->unsigned()->nullable();
             $table->integer('fki_security_id')->unsigned()->default(1);
-            $table->bigInteger('epo');
+            $table->string('epo', 50)->unique();
             $table->string('name');
             $table->string('reference_name')->nullable();
             $table->string('subject');
@@ -45,12 +45,6 @@ class CreateProjectsTable extends Migration
             $table->foreign('fki_client_id')
                     ->references('pki_client_id')
                     ->on('clients')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_vendordetail_id']);
-            $table->foreign('fki_vendordetail_id')
-                    ->references('pki_vendordetail_id')
-                    ->on('vendordetails')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             $table->index(['fki_user_id']);

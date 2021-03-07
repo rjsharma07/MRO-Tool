@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Currency;
 
 class CurrencyController extends Controller
 {
@@ -26,14 +27,14 @@ class CurrencyController extends Controller
         ]);
         
         \DB::beginTransaction();
-        $countryOb = new Client();
-        $countryOb->country = $request->country;
+        $countryOb = new Currency();
+        $countryOb->currency = $request->currency;
         $countryOb->created = \Carbon\Carbon::now();
         $countryOb->updated = \Carbon\Carbon::now();
         $countryOb->save();
         \DB::commit();
 
-        return redirect()->route('countries.index')
+        return redirect()->route('currencies.index')
             ->with('success', 'Country updated successfully');
     }
 
@@ -42,22 +43,22 @@ class CurrencyController extends Controller
         //
     }
 
-    public function update(Request $request, Country $country)
+    public function update(Request $request, Currency $country)
     {
         $request->validate([
             'country' => 'required',
         ]);
         $country->update($request->all());
 
-        return redirect()->route('countries.index')
-            ->with('success', 'Country updated successfully');
+        return redirect()->route('currencies.index')
+            ->with('success', 'Currency updated successfully');
     }
 
-    public function destroy(Country $country)
+    public function destroy(Currency $country)
     {
         $client->delete();
 
-        return redirect()->route('countries.index')
-            ->with('success', 'Country deleted successfully');
+        return redirect()->route('currencies.index')
+            ->with('success', 'Currency deleted successfully');
     }
 }

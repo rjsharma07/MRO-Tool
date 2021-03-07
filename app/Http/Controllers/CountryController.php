@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Country;
 
 class CountryController extends Controller
 {
@@ -26,7 +27,7 @@ class CountryController extends Controller
         ]);
         
         \DB::beginTransaction();
-        $countryOb = new Client();
+        $countryOb = new Country();
         $countryOb->country = $request->country;
         $countryOb->created = \Carbon\Carbon::now();
         $countryOb->updated = \Carbon\Carbon::now();

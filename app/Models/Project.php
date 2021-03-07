@@ -13,8 +13,8 @@ class Project extends Model
 
     protected $table = 'projects';
     protected $primaryKey = 'pki_project_id';
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'updated';
 
     public static function getProjects(){
         $project = Project::all();
