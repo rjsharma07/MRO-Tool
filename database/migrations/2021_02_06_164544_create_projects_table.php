@@ -16,23 +16,22 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('pki_project_id');
             $table->bigInteger('fki_client_id')->unsigned();
-            $table->bigInteger('fki_vendordetail_id')->unsigned();
             $table->bigInteger('fki_user_id')->unsigned();
-            $table->bigInteger('fki_country_id')->unsigned();
-            $table->bigInteger('fki_currency_id')->unsigned();
-            $table->bigInteger('fki_status_id')->unsigned();
+            $table->bigInteger('fki_country_id')->unsigned()->nullable();
+            $table->bigInteger('fki_currency_id')->unsigned()->nullable();
+            $table->bigInteger('fki_status_id')->unsigned()->default(0);
             $table->bigInteger('fki_industrytype_id')->unsigned()->nullable();
             $table->integer('fki_security_id')->unsigned()->default(1);
-            $table->bigInteger('epo_number');
+            $table->bigInteger('epo');
             $table->string('name');
-            $table->string('reference_name');
+            $table->string('reference_name')->nullable();
             $table->string('subject');
-            $table->string('type');
-            $table->bigInteger('ir');
-            $table->bigInteger('loi');
-            $table->float('cpi');
+            $table->string('type')->nullable();
+            $table->bigInteger('ir')->nullable();
+            $table->bigInteger('loi')->nullable();
+            $table->float('cpi')->nullable();
             $table->bigInteger('hits')->default(0);
-            $table->bigInteger('required_completes');
+            $table->bigInteger('required_completes')->default(100);
             $table->bigInteger('completes')->default(0);
             $table->text('client_survey_url')->nullable();
             $table->text('complete_url')->nullable();
@@ -58,18 +57,6 @@ class CreateProjectsTable extends Migration
             $table->foreign('fki_user_id')
                     ->references('pki_user_id')
                     ->on('users')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_country_id']);
-            $table->foreign('fki_country_id')
-                    ->references('pki_country_id')
-                    ->on('countries')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->index(['fki_currency_id']);
-            $table->foreign('fki_currency_id')
-                    ->references('pki_currency_id')
-                    ->on('currency')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             $table->index(['fki_status_id']);

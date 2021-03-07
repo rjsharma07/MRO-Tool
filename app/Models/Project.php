@@ -12,7 +12,7 @@ class Project extends Model
     use HasFactory;
 
     protected $table = 'projects';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'pki_project_id';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

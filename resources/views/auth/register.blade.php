@@ -43,6 +43,7 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
+                <input type="hidden" name="fki_role_id" value="2" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

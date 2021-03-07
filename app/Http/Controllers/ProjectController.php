@@ -37,29 +37,32 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'pname' => 'required',
-            'pclient'=> 'required',
-            'pir'=> 'required',
-            'ploi'=> 'required',
-            'pcpi'=> 'required',
-            'prcompletes'=> 'required',
-            'ptype'=> 'required',
-            'pclient'=> 'required',
-            'pcurrency'=> 'required',
-            'psurveyl'=> 'required',
-            'pcompletel'=> 'required',
-            'psurveyl'=> 'required',
-            'pquotal'=> 'required',
-            'pqualityl'=> 'required',
-            'pdescription' => 'required'
+    {   if($request->new_submit){
+            $request->validate([
+                'name' => 'required',
+                'subject' => 'required',
+                'fki_client_id'=> 'required',
+                'fki_user_id'=> 'required',
+            ]);
+            
+            \DB::beginTransaction();
+            $projectOb = new Project();
+            $projectOb->name = $request->name;
+            $projectOb->subject = $request->subject;
+            $projectOb->fki_client_id = $request->fki_client_id;
+            $projectOb->fki_user_id = $request->fki_user_id;
+            $projectOb->save();
+            \DB::commit();
+
+            $project = Project::find($projectOb->pki_project_id);
+            return view('project.edit-add',[
+                'project' => $project
+            ]);
+        }
+        $project = Project::where('epo', $request->epo)->first();
+        return view('project.edit-add',[
+            'project' => $project
         ]);
-
-        Product::create($request->all());
-
-        return redirect()->route('projects.index')
-            ->with('success', 'Product created successfully.');
     }
 
     /**
@@ -69,8 +72,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($project_id)
-    {   $project = Project::find($project_id);
-        return view('projects.view', compact('project'));
+    {   
+        //
     }
 
     /**
@@ -81,7 +84,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        return view('projects.edit-add', compact('project'));
     }
     /**
      * Update the specified resource in storage.
@@ -93,21 +96,10 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $request->validate([
-            'pname' => 'required',
-            'pclient'=> 'required',
-            'pir'=> 'required',
-            'ploi'=> 'required',
-            'pcpi'=> 'required',
-            'prcompletes'=> 'required',
-            'ptype'=> 'required',
-            'pclient'=> 'required',
-            'pcurrency'=> 'required',
-            'psurveyl'=> 'required',
-            'pcompletel'=> 'required',
-            'psurveyl'=> 'required',
-            'pquotal'=> 'required',
-            'pqualityl'=> 'required',
-            'pdescription' => 'required'
+            'name' => 'required',
+            'subject' => 'required',
+            'client'=> 'required',
+            'manager'=> 'required',
         ]);
         $project->update($request->all());
 
