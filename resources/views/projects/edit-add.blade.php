@@ -84,25 +84,25 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="pcompletel">Complete</label>
-                                <input type="text" class="form-control" name="complete_url" value="{{$project->complete_url}}" placeholder="Enter Survey Complete Redirect">
+                                <input type="text" class="form-control" name="complete_url" readonly value="{{$project->complete_url}}" placeholder="Enter Survey Complete Redirect">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="psurveyl">Disqualify</label>
-                                <input type="text" class="form-control" name="disqualify_url" placeholder="Enter Disqualify Redirect ">
+                                <input type="text" class="form-control" name="disqualify_url" readonly value="{{$project->disqualify_url}}" placeholder="Enter Disqualify Redirect ">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="pquotal">Quotafull</label>
-                                <input type="text" class="form-control" name="quotafull_url" placeholder="Enter Quotafull Redirect">
+                                <input type="text" class="form-control" name="quotafull_url" readonly value="{{$project->quotafull_url}}" placeholder="Enter Quotafull Redirect">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="pqualityl">Quality Team</label>
-                                <input type="text" class="form-control" name="quality_url" placeholder="Enter Quality Team Redirect">
+                                <input type="text" class="form-control" name="quality_url" readonly value="{{$project->quality_url}}" placeholder="Enter Quality Team Redirect">
                             </div>
                         </div>
                         <!-- <div class="form-group form-check">
