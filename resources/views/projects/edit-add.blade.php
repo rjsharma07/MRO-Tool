@@ -78,7 +78,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="psurveyl">Survey Link</label>
-                                <input type="text" class="form-control" name="survey_url" placeholder="Enter Survey Link">
+                                <input type="text" class="form-control" name="survey_url" readonly value="{{$project->survey_url}}" placeholder="Enter Survey Link">
                             </div>
                         </div>
                         <div class="form-group">
@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="pqualityl">Quality Team</label>
-                                <input type="text" class="form-control" name="quality_url" readonly value="{{$project->quality_url}}" placeholder="Enter Quality Team Redirect">
+                                <input type="text" class="form-control" name="quality_url" readonly value="{{$project->quality_term_url}}" placeholder="Enter Quality Team Redirect">
                             </div>
                         </div>
                         <!-- <div class="form-group form-check">

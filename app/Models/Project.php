@@ -21,14 +21,22 @@ class Project extends Model
         return $project;
     }
 
-    public function generateLinks($request, $unique = false) {
+    public function generateAlphaLinks($request) {
         
-        $urlToken = Str::uuid();
+        $this->complete_url = $request->getHost()."/survey-response/alpha_url/complete";
+        $this->disqualify_url = $request->getHost()."/survey-response/alpha_url/disqualify";
+        $this->quotafull_url = $request->getHost()."/survey-response/alpha_url/quota-full";
+        $this->quality_term_url = $request->getHost()."/survey-response/alpha_url/quality-term";
 
-        $this->complete_url = $request->getHost()."/survey-response/".$urlToken."/complete";
-        $this->disqualify_url = $request->getHost()."/survey-response/".$urlToken."/disqualify";
-        $this->quotafull_url = $request->getHost()."/survey-response/".$urlToken."/quota-full";
-        $this->quality_term_url = $request->getHost()."/survey-response/".$urlToken."/quality-term";
+        return $this->save();
+    }
+
+    public function generateUniqueLinks($request) {
+        
+        $this->complete_url = $request->getHost()."/survey-response/".Str::uuid()."/complete";
+        $this->disqualify_url = $request->getHost()."/survey-response/".Str::uuid()."/disqualify";
+        $this->quotafull_url = $request->getHost()."/survey-response/".Str::uuid()."/quota-full";
+        $this->quality_term_url = $request->getHost()."/survey-response/".Str::uuid()."/quality-term";
 
         return $this->save();
     }

@@ -63,8 +63,11 @@ class ProjectController extends Controller
 
             $projectOb->save();
             \DB::commit();
-            
-            $projectOb->generateLinks($request);
+            if($request->security){
+                $projectOb->generateUniqueLinks($request);
+            } else {
+                $projectOb->generateAlphaLinks($request);
+            }
             
             $project = Project::find($projectOb->pki_project_id);
             
