@@ -36,7 +36,7 @@
                             @foreach($projects as $project)
                             <a href="javascript:void(0);">
                                 <tr>
-                                <th scope="row">{{$project->name}}</th>
+                                <th scope="row"><a href="{{route('projects.show', $project->pki_project_id)}}">{{$project->name}}</a></th>
                                 <td>{{$project->client}}</td>
                                 <td>{{$project->country}}</td>
                                 <td>{{$project->manager}}</td>

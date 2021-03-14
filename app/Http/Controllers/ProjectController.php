@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Client;
+use App\Models\Country;
 use App\Models\Currency;
 use App\Models\User;
+use App\Models\Vendor;
 
 class ProjectController extends Controller
 {
@@ -71,13 +73,13 @@ class ProjectController extends Controller
             
             $project = Project::find($projectOb->pki_project_id);
             
-            $currencies = Currency::all();
+            $countries = Country::all();
             $clients = Client::all();
             
             return view('projects.edit-add',[
                 'project' => $project,
                 'clients'=>$clients,
-                'currencies'=>$currencies
+                'countries'=>$countries
             ]);
         }
     }
@@ -99,9 +101,20 @@ class ProjectController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
-    {
-        return view('projects.edit-add', compact('project'));
+    public function edit($project_id)
+    {   
+        $project = Project::find($project_id);
+        $clients = Client::all();
+        $users = User::all();
+        $countries = Country::all();
+        $vendors = Vendor::all();
+        return view('projects.edit-add', [
+            'project' => $project,
+            'clients' => $clients,
+            'users' => $users,
+            'countries' => $countries,
+            'vendors' => $vendors
+        ]);
     }
     /**
      * Update the specified resource in storage.
@@ -110,18 +123,41 @@ class ProjectController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
-    {
-        $request->validate([
-            'name' => 'required',
-            'subject' => 'required',
-            'client'=> 'required',
-            'manager'=> 'required',
-        ]);
-        $project->update($request->all());
+    public function update(Request $request)
+    {   if($request->_token){
+            $project = Project::find($request->pki_project_id);
+            if($request->ir){
+                $project->ir = $request->ir;
+            }
+            if($request->loi){
+                $project->loi = $request->loi;
+            }
+            if($request->cpi){
+                $project->cpi = $request->cpi;
+            }
+            if($request->required_completes){
+                $project->required_completes = $request->required_completes;
+            }
+            if($request->client_survey_url){
+                $project->client_survey_url = $request->client_survey_url;
+            }
+            if($request->complete_url){
+                $project->complete_url = $request->complete_url;
+            }
+            if($request->disqualify_url){
+                $project->disqualify_url = $request->disqualify_url;
+            }
+            if($request->quotafull_url){
+                $project->quotafull_url = $request->quotafull_url;
+            }
+            if($request->quality_url){
+                $project->quality_url = $request->quality_url;
+            }
+            $project->save();
 
-        return redirect()->route('projects.index')
+            return redirect()->route('projects.index')
             ->with('success', 'Project updated successfully');
+        }
     }
     /**
      * Remove the specified resource from storage.

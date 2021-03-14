@@ -9,9 +9,34 @@
 .table-outer {
     width: 100%;
 }
+.modal {
+    overflow: scroll!important;
+}
 .modal-body .nav-item{
     width: 50%;
 }
 .tab-content {
     margin: 15px 0px;
+}
+.project-form .form-control {
+    margin-bottom: 15px;
+}
+.project-form h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #707070;
+    font-weight: 700;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #c3c3c3;
+}
+.vendordetails-outer {
+    margin-top: 50px;
+}
+.vendors-outer table, .vendordetails-outer table {
+    table-layout: fixed;
+}
+.vendors-outer table tr td, .vendordetails-outer table tr td {
+    width: 100px;
+    word-wrap: break-word;
 }

@@ -19,12 +19,28 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [ProjectController::class, 'index'])->name('projects')->middleware('auth');
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects')->middleware('auth');
-Route::get('/projects/{id}', [ProjectController::class, 'show'])->middleware('auth');
+
+Route::get('/projects', [
+    'uses'=>'ProjectController@index',
+    'as'=>'projects.index',
+    'middleware'=>'auth'
+]);
+
+Route::get('/projects/{id}', [
+    'uses'=>'ProjectController@edit',
+    'as'=>'projects.show',
+    'middleware'=>'auth'
+]);
 
 Route::post('/project/store', [
     'uses'=>'ProjectController@store',
     'as'=>'projects.store',
+    'middleware'=>'auth'
+]);
+
+Route::post('/project/update', [
+    'uses'=>'ProjectController@update',
+    'as'=>'projects.update',
     'middleware'=>'auth'
 ]);
 
@@ -43,6 +59,42 @@ Route::get('/clients/create', [
 Route::post('/clients/create', [
     'uses'=>'ClientController@store',
     'as'=>'clients.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendors', [
+    'uses'=>'VendorController@index',
+    'as'=>'vendors.index',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendors/create', [
+    'uses'=>'VendorController@create',
+    'as'=>'vendors.create',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendors/create', [
+    'uses'=>'VendorController@store',
+    'as'=>'vendors.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendordetails', [
+    'uses'=>'VendorDetailController@index',
+    'as'=>'vendordetails.index',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendordetails/create', [
+    'uses'=>'VendorDetailController@create',
+    'as'=>'vendordetails.create',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendordetails/create', [
+    'uses'=>'VendorDetailController@store',
+    'as'=>'vendordetails.store',
     'middleware'=>'auth'
 ]);
 
