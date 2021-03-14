@@ -45,7 +45,7 @@ class Project extends Model
         
         $urlToken = Str::uuid();
 
-        $this->client_survey_url = $request->getHost()."/survey/".$urlToken;
+        $this->generated_survey_url = $request->getHost()."/survey/".$urlToken;
 
         return $this->save();
     }

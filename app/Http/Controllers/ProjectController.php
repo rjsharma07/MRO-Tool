@@ -140,23 +140,14 @@ class ProjectController extends Controller
             }
             if($request->client_survey_url){
                 $project->client_survey_url = $request->client_survey_url;
+                $project->maskSurvey($request);
             }
-            if($request->complete_url){
-                $project->complete_url = $request->complete_url;
-            }
-            if($request->disqualify_url){
-                $project->disqualify_url = $request->disqualify_url;
-            }
-            if($request->quotafull_url){
-                $project->quotafull_url = $request->quotafull_url;
-            }
-            if($request->quality_url){
-                $project->quality_url = $request->quality_url;
-            }
+            
             $project->save();
-
+            
             return redirect()->route('projects.index')
             ->with('success', 'Project updated successfully');
+            
         }
     }
     /**

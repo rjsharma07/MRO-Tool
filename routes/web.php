@@ -138,4 +138,8 @@ Route::get('/survey-response/{urlId}/{status}', [
     'uses'=>'RedirectController@captureRedirect'
 ]);
 
+Route::get('/survey/{urlId}', [
+    'uses'=>'RedirectController@redirectSurvey'
+]);
+
 require __DIR__.'/auth.php';
