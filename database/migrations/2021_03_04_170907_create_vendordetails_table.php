@@ -15,10 +15,11 @@ class CreateVendordetailsTable extends Migration
     {
         Schema::create('vendordetails', function (Blueprint $table) {
             $table->bigIncrements('pki_vendordetail_id');
-            $table->bigInteger('fki_vendor_id')->unsigned();
             $table->bigInteger('fki_project_id')->unsigned();
             $table->bigInteger('fki_status_id')->unsigned()->default(0);
             $table->bigInteger('fki_industrytype_id')->unsigned()->nullable();
+            $table->bigInteger('fki_country_id')->unsigned()->nullable();
+            $table->string('vendor');
             $table->text('survey_url');
             $table->float('cpi');
             $table->integer('loi')->nullable();

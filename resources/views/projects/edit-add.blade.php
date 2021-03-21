@@ -151,11 +151,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label>Vendor</label>
-                                        <select class="form-control" name="fki_vendor_id">
-                                            @foreach($vendors as $vendor)
-                                                <option value="{{$vendor->pki_vendor_id}}">{{$vendor->vendor}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" name="vendor" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +171,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label>Survey Link</label>
-                                        <input type="text" name="survey_link" class="form-control" required>
+                                        <input type="text" name="survey_url" class="form-control" required>
                                     </div>
                                 </div>
                             </div>

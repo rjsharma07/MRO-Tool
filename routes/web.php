@@ -28,7 +28,7 @@ Route::get('/projects', [
 
 Route::get('/projects/{id}', [
     'uses'=>'ProjectController@edit',
-    'as'=>'projects.show',
+    'as'=>'projects.edit',
     'middleware'=>'auth'
 ]);
 
@@ -62,24 +62,6 @@ Route::post('/clients/create', [
     'middleware'=>'auth'
 ]);
 
-Route::get('/vendors', [
-    'uses'=>'VendorController@index',
-    'as'=>'vendors.index',
-    'middleware'=>'auth'
-]);
-
-Route::get('/vendors/create', [
-    'uses'=>'VendorController@create',
-    'as'=>'vendors.create',
-    'middleware'=>'auth'
-]);
-
-Route::post('/vendors/create', [
-    'uses'=>'VendorController@store',
-    'as'=>'vendors.store',
-    'middleware'=>'auth'
-]);
-
 Route::get('/vendordetails', [
     'uses'=>'VendorDetailController@index',
     'as'=>'vendordetails.index',
@@ -92,9 +74,21 @@ Route::get('/vendordetails/create', [
     'middleware'=>'auth'
 ]);
 
-Route::post('/vendordetails/create', [
+Route::post('/vendordetails/store', [
     'uses'=>'VendorDetailController@store',
     'as'=>'vendordetails.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendordetails/{vendor_id}', [
+    'uses'=>'VendorDetailController@edit',
+    'as'=>'vendordetails.edit',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendordetails/update', [
+    'uses'=>'VendorDetailController@update',
+    'as'=>'vendordetails.update',
     'middleware'=>'auth'
 ]);
 

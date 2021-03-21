@@ -72,15 +72,9 @@ class ProjectController extends Controller
             }
             
             $project = Project::find($projectOb->pki_project_id);
-            
-            $countries = Country::all();
-            $clients = Client::all();
-            
-            return view('projects.edit-add',[
-                'project' => $project,
-                'clients'=>$clients,
-                'countries'=>$countries
-            ]);
+        
+            return redirect()->route('projects.edit', $project->pki_project_id)
+            ->with('success', 'Project updated successfully');
         }
     }
 
@@ -107,13 +101,11 @@ class ProjectController extends Controller
         $clients = Client::all();
         $users = User::all();
         $countries = Country::all();
-        $vendors = Vendor::all();
         return view('projects.edit-add', [
             'project' => $project,
             'clients' => $clients,
             'users' => $users,
-            'countries' => $countries,
-            'vendors' => $vendors
+            'countries' => $countries
         ]);
     }
     /**
@@ -145,7 +137,7 @@ class ProjectController extends Controller
             
             $project->save();
             
-            return redirect()->route('projects.index')
+            return redirect()->route('projects.edit', $project->pki_project_id)
             ->with('success', 'Project updated successfully');
             
         }

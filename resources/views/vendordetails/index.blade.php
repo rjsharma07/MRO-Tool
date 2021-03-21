@@ -48,7 +48,7 @@
                                     <td>{{$vendordetail->complete_url}}</td>
                                     <td>{{$vendordetail->disqualify_url}}</td>
                                     <td>{{$vendordetail->quotafull_url}}</td>
-                                    <td>{{$vendordetail->qualityterm_url}}</td>
+                                    <td>{{$vendordetail->quality_term_url}}</td>
                                     <td>{{$vendordetail->updated->format('d/m/Y h:m:i A')}}</td>
                                 </tr>
                             @endforeach
