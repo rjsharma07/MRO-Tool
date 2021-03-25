@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 
 class Project extends Model
@@ -41,12 +40,4 @@ class Project extends Model
         return $this->save();
     }
 
-    public function maskSurvey($request) {
-        
-        $urlToken = Str::uuid();
-
-        $this->generated_survey_url = $request->getHost()."/survey/".$urlToken."?pid=";
-
-        return $this->save();
-    }
 }

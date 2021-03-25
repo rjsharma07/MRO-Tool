@@ -99,10 +99,6 @@
                                     <label for="psurveyl">Client Survey Link</label>
                                     <input type="text" class="form-control" name="client_survey_url" value="{{$project->client_survey_url}}" placeholder="Enter Survey Link">
                                 </div>
-                                <div class="col-sm-12">
-                                    <label for="psurveyl">Generated Survey Link</label>
-                                    <input type="text" class="form-control" name="generated_survey_url" value="{{$project->generated_survey_url}}" readonly placeholder="Enter Survey Link">
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,14 +163,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <label>Survey Link</label>
-                                        <input type="text" name="survey_url" class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <!-- <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">

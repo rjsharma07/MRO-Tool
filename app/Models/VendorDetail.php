@@ -14,6 +14,10 @@ class VendorDetail extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
 
+    public function project() {
+        return $this->belongsTo(Project::class, "fki_project_id");
+    }
+
     public static function getVendorDetails($vendordetail_id){
         return VendorDetail::select(
             'vendordetails.pki_vendordetail_id as pki_vendordetail_id',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VendorDetail;
 use App\Models\Project;
 use App\Models\Country;
+use Illuminate\Support\Str;
 
 class VendorDetailController extends Controller
 {
@@ -31,8 +32,7 @@ class VendorDetailController extends Controller
             'vendor' => 'required',
             'fki_project_id' => 'required|integer',
             'cpi' => 'required',
-            'required_completes' => 'required',
-            'survey_url' => 'required'
+            'required_completes' => 'required'
         ]);
         
         \DB::beginTransaction();
@@ -41,9 +41,12 @@ class VendorDetailController extends Controller
         $vendorOb->fki_project_id = $request->fki_project_id;
         $vendorOb->cpi = $request->cpi;
         $vendorOb->required_completes = $request->required_completes;
-        $vendorOb->survey_url = $request->survey_url;
         $vendorOb->created = \Carbon\Carbon::now();
         $vendorOb->updated = \Carbon\Carbon::now();
+        $vendorOb->survey_url = "";
+        $vendorOb->save();
+        $urlToken = Str::uuid();
+        $vendorOb->survey_url = $request->getHost()."/survey/".$urlToken.$vendorOb->pki_vendordetail_id."?pid=";
         $vendorOb->save();
         \DB::commit();
 
