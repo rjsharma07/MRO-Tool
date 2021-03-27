@@ -128,7 +128,7 @@ Route::post('/currencies/create', [
     'middleware'=>'auth'
 ]);
 
-Route::get('/survey-response/{urlId}/{status}', [
+Route::get('/survey-response/{urlId}', [
     'uses'=>'RedirectController@captureRedirect'
 ]);
 
