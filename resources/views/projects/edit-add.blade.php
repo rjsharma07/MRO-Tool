@@ -78,16 +78,16 @@
                                 </div>
                                 <div class="col-sm-3"> 
                                     <label for="prcompletes">Completes</label>
-                                    <input type="text" class="form-control" name="completes">
+                                    <input type="text" class="form-control" name="completes" value="{{$project->complete_count}}">
                                 </div>
                                 <div class="col-sm-3"> 
                                     <label for="prcompletes">Total Hits</label>
-                                    <input type="text" class="form-control" name="hits">
+                                    <input type="text" class="form-control" name="hits" value="{{$project->hits}}">
                                 </div>
-                                <div class="col-sm-3"> 
+                                <!-- <div class="col-sm-3"> 
                                     <label for="prcompletes">In Survey</label>
                                     <input type="text" class="form-control" name="in_survey">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="form-group">
