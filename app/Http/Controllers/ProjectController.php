@@ -132,7 +132,7 @@ class ProjectController extends Controller
             }
             if($request->client_survey_url){
                 $project->client_survey_url = $request->client_survey_url;
-                $project->maskSurvey($request);
+                //$project->maskSurvey($request);
             }
             
             $project->save();
