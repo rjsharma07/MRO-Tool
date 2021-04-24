@@ -16,13 +16,7 @@ use Illuminate\Support\Str;
 class RedirectController extends Controller
 {
     public function captureRedirect(Request $request, $urlId) {
-        $query = $request->query();
-        $count = count($query);
-        foreach($query as $index => $para){
-            if($index == ($count-1)){
-                $pid = $para;
-            }
-        }
+        $pid = $request->pid;
 
         $status = $request->get('status');
         
@@ -42,7 +36,9 @@ class RedirectController extends Controller
                 $project->complete_count = $project->complete_count ? ++$project->complete_count : 1;
                 $project->save();
 
-                $response = Http::get($redirect->complete_url, $vendorOb->vendor_respondent_id);
+                $response = Http::get($redirect->complete_url, [
+                    'pid' => $vendorOb->vendor_respondent_id
+                ]);
 
                 break;
             case "2": 
@@ -50,7 +46,9 @@ class RedirectController extends Controller
                 $project->disqualify_count = $project->disqualify_count ? ++$project->disqualify_count : 1;
                 $project->save();
 
-                $response = Http::get($redirect->disqualify_url, $vendorOb->vendor_respondent_id);
+                $response = Http::get($redirect->disqualify_url, [
+                    'pid' => $vendorOb->vendor_respondent_id
+                ]);
 
                 break;
             case "3": 
@@ -58,7 +56,9 @@ class RedirectController extends Controller
                 $project->quota_full_count = $project->quota_full_count ? ++$project->quota_full_count : 1;
                 $project->save();
 
-                $response = Http::get($redirect->quotafull_url, $vendorOb->vendor_respondent_id);
+                $response = Http::get($redirect->quotafull_url, [
+                    'pid' => $vendorOb->vendor_respondent_id
+                ]);
 
                 break;
             case "4": 
@@ -66,7 +66,9 @@ class RedirectController extends Controller
                 $project->quality_term_count = $project->quality_term_count ? ++$project->quality_term_count : 1;
                 $project->save();
                 
-                $response = Http::get($redirect->quality_term_url, $vendorOb->vendor_respondent_id);
+                $response = Http::get($redirect->quality_term_url, [
+                    'pid' => $vendorOb->vendor_respondent_id
+                ]);
 
                 break;
 
@@ -75,13 +77,7 @@ class RedirectController extends Controller
     }
 
     public function redirectSurvey(Request $request, $urlId) {
-        $query = $request->query();
-        $count = count($query);
-        foreach($query as $index => $para){
-            if($index == ($count-1)){
-                $pid = $para;
-            }
-        }
+        $pid = $request->pid;
         $vendorDetail = VendorDetail::where('survey_url', 'like', '%/survey/'.$urlId.'%')->first();
         $vendorDetail->project->survey_visited_count = $vendorDetail->project->survey_visited_count ? ++$vendorDetail->project->survey_visited_count : 1;
         $vendorDetail->project->hits = $vendorDetail->project->hits ? ++$vendorDetail->project->hits : 1;
