@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 class RedirectController extends Controller
 {
     public function captureRedirect(Request $request, $urlId) {
-        $pid = $request->pid;
+        $pid = $request->get('pid');
 
         $status = $request->get('status');
         
@@ -77,7 +77,7 @@ class RedirectController extends Controller
     }
 
     public function redirectSurvey(Request $request, $urlId) {
-        $pid = $request->pid;
+        $pid = $request->get('pid');
         $vendorDetail = VendorDetail::where('survey_url', 'like', '%/survey/'.$urlId.'%')->first();
         $vendorDetail->project->survey_visited_count = $vendorDetail->project->survey_visited_count ? ++$vendorDetail->project->survey_visited_count : 1;
         $vendorDetail->project->hits = $vendorDetail->project->hits ? ++$vendorDetail->project->hits : 1;
