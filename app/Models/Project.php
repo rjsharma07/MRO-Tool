@@ -37,10 +37,10 @@ class Project extends Model
 
     public function generateUniqueLinks($request) {
         
-        $this->complete_url = $request->getHost()."/survey-response/".Str::uuid()."?&status=1&pid=";
-        $this->disqualify_url = $request->getHost()."/survey-response/".Str::uuid()."?&status=2&pid=";
-        $this->quotafull_url = $request->getHost()."/survey-response/".Str::uuid()."?&status=3&pid=";
-        $this->quality_term_url = $request->getHost()."/survey-response/".Str::uuid()."?&status=4&pid=";
+        $this->complete_url = $request->getHost()."/survey-response/".Str::uuid()."?status=1&pid=";
+        $this->disqualify_url = $request->getHost()."/survey-response/".Str::uuid()."?status=2&pid=";
+        $this->quotafull_url = $request->getHost()."/survey-response/".Str::uuid()."?status=3&pid=";
+        $this->quality_term_url = $request->getHost()."/survey-response/".Str::uuid()."?status=4&pid=";
 
         return $this->save();
     }
