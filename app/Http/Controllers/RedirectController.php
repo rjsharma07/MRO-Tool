@@ -20,7 +20,7 @@ class RedirectController extends Controller
         $count = count($inputs);
         foreach($inputs as $index=>$input){
             if($index == ($count-1)){
-                $pid = (int)$input;
+                $pid = $input;
             }
         }
 
@@ -87,7 +87,7 @@ class RedirectController extends Controller
         $count = count($inputs);
         foreach($inputs as $index=>$input){
             if($index == ($count-1)){
-                $pid = (int)$input;
+                $pid = $input;
             }
         }
         
