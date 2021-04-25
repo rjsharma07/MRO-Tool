@@ -23,7 +23,10 @@
                                 <th scope="col">LOI</th>
                                 <th scope="col">IR</th>
                                 <th scope="col">CPI</th>
-                                <th scope="col">Completes</th>  
+                                <th scope="col">Completes</th>
+                                <th scope="col">Disqualify</th>  
+                                <th scope="col">Quality Term</th>
+                                <th scope="col">Quota Full</th>
                                 <th scope="col">Hits</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Last Complete</th>
@@ -43,7 +46,10 @@
                                 <td>{{$project->loi}}</td>
                                 <td>{{$project->ir}}</td>
                                 <td>{{$project->cpi}}</td>
-                                <td>{{$project->completes}} / {{$project->required_completes}}</td>
+                                <td>{{$project->completes_count}} / {{$project->required_completes}}</td>
+                                <td>{{$project->disqualify_count}}</td>
+                                <td>{{$project->quality_term_count}}</td>
+                                <td>{{$project->quota_full_count}}</td>
                                 <td>{{$project->hits}}</td>
                                 <td>{{$project->status}}</td>
                                 <td>{{$project->last_complete}}</td>
