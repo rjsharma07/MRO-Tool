@@ -20,15 +20,15 @@ class RedirectController extends Controller
 
         $status = $request->get('status');
         
-        $projectOb = ProjectDetail::where('respondent_id', $pid);
+        $projectOb = ProjectDetail::where('respondent_id', $pid)->first();
         $projectOb->fki_status_id = $status;
         $projectOb->save();
 
-        $vendorOb = VendorProjectDetail::where('respondent_id', $pid);
+        $vendorOb = VendorProjectDetail::where('respondent_id', $pid)->first();
         $vendorOb->fki_status_id = $status;
         $vendorOb->save();
 
-        $redirect = VendorDetail::where('pki_vendordetail_id', $vendor->fki_vendordetail_id);
+        $redirect = VendorDetail::where('pki_vendordetail_id', $vendorOb->fki_vendordetail_id)->first();
 
         switch($status) {
             case "1": 
@@ -83,7 +83,7 @@ class RedirectController extends Controller
         $vendorDetail->project->hits = $vendorDetail->project->hits ? ++$vendorDetail->project->hits : 1;
         $vendorDetail->project->save();
 
-        $projectRespId = Str::uuid();
+        $projectRespId = mt_rand(1000000000, 9999999999);
         
         $vendorOb = new VendorProjectDetail();
         $vendorOb->fki_project_id = $vendorDetail->fki_project_id;
@@ -103,6 +103,6 @@ class RedirectController extends Controller
         $projectOb->updated = \Carbon\Carbon::now();
         $projectOb->save();
 
-        return redirect()->to($vendorDetail->project->client_survey_url, $projectRespId);
+        return redirect()->to($vendorDetail->project->client_survey_url.$projectRespId);
     }
 }
