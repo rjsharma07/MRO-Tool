@@ -66,6 +66,19 @@ class VendorDetailController extends Controller
         ]);
     }
 
+    public function show($vendor_id)
+    {   
+        $vendor = VendorDetail::find($vendor_id);
+        $project = Project::find($vendor->fki_project_id);
+        $countries = Country::all();
+        return view('vendordetails.show', [
+            'vendor'=>$vendor,
+            'project'=>$project,
+            'countries'=>$countries
+        ]);
+    }
+
+
     public function update(Request $request)
     {
         if($request->_token){
@@ -98,7 +111,7 @@ class VendorDetailController extends Controller
             $vendor->save();
 
             return redirect()
-                ->route('vendordetails.edit', $vendor->pki_vendordetail_id);
+                ->route('vendordetails.show', $vendor->pki_vendordetail_id);
             
         }
     }

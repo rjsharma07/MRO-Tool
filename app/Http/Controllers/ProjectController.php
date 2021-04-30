@@ -86,7 +86,16 @@ class ProjectController extends Controller
      */
     public function show($project_id)
     {   
-        //
+        $project = Project::find($project_id);
+        $clients = Client::all();
+        $users = User::all();
+        $countries = Country::all();
+        return view('projects.show', [
+            'project' => $project,
+            'clients' => $clients,
+            'users' => $users,
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -137,7 +146,7 @@ class ProjectController extends Controller
             
             $project->save();
             
-            return redirect()->route('projects.edit', $project->pki_project_id)
+            return redirect()->route('projects.show', $project->pki_project_id)
             ->with('success', 'Project updated successfully');
             
         }

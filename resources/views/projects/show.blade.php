@@ -8,6 +8,7 @@
         <div class="row">
             <div class="btn-panel">
                 <button id="addVendor" class="btn btn-primary">Add Vendor</button>
+                <a class="btn btn-primary" href="{{route('projects.edit', $project->pki_project_id)}}">Edit Project</a>
             </div>
             <div class="project-form">
                 <div class="col-md-12">
@@ -24,7 +25,7 @@
                                 </div>
                                 <div class="col-sm-4"> 
                                     <label>Project Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{$project->name}}">
+                                    <input type="text" class="form-control" name="name" value="{{$project->name}}" readonly>
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Subject</label>
@@ -40,14 +41,14 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Type</label>
-                                    <select name="type" class="form-control">
+                                    <select name="type" class="form-control" readonly>
                                         <option value="b2b">B2B</option>
                                         <option value="b2c">B2C</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Country</label>
-                                    <select name="fki_country_id" class="form-control">
+                                    <select name="fki_country_id" class="form-control" readonly>
                                     @foreach($countries as $country)
                                         <option value="{{$country->pki_country_id}}">{{$country->country}}</option>
                                     @endforeach
@@ -55,15 +56,15 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="pir">Incidence Rate</label>
-                                    <input type="text" class="form-control" name="ir" placeholder="Enter Incidence Rate" value="{{$project->ir}}">
+                                    <input type="text" class="form-control" name="ir" readonly placeholder="Enter Incidence Rate" value="{{$project->ir}}">
                                 </div>
                                 <div class="col-sm-4">    
                                     <label>Length of Interview</label>
-                                    <input type="text" class="form-control" name="loi" placeholder="Enter Length of Interview" value="{{$project->loi}}">
+                                    <input type="text" class="form-control" name="loi" readonly placeholder="Enter Length of Interview" value="{{$project->loi}}">
                                 </div>
                                 <div class="col-sm-4"> 
                                     <label for="pcpi">CPI</label>
-                                    <input type="text" class="form-control" name="cpi" placeholder="Enter CPI" value="{{$project->cpi}}">
+                                    <input type="text" class="form-control" name="cpi" readonly placeholder="Enter CPI" value="{{$project->cpi}}">
                                 </div>
                             </div>
                         </div>
@@ -74,15 +75,15 @@
                                 </div>
                                 <div class="col-sm-3"> 
                                     <label for="prcompletes">Required Completes</label>
-                                    <input type="text" class="form-control" name="required_completes" placeholder="Enter Required Completes" value="{{$project->required_completes}}">
+                                    <input type="text" class="form-control" readonly name="required_completes" placeholder="Enter Required Completes" value="{{$project->required_completes}}">
                                 </div>
                                 <div class="col-sm-3"> 
                                     <label for="prcompletes">Completes</label>
-                                    <input type="text" class="form-control" name="completes" value="{{$project->complete_count}}">
+                                    <input type="text" class="form-control" readonly name="completes" value="{{$project->complete_count}}">
                                 </div>
                                 <div class="col-sm-3"> 
                                     <label for="prcompletes">Total Hits</label>
-                                    <input type="text" class="form-control" name="hits" value="{{$project->hits}}">
+                                    <input type="text" class="form-control" readonly name="hits" value="{{$project->hits}}">
                                 </div>
                                 <!-- <div class="col-sm-3"> 
                                     <label for="prcompletes">In Survey</label>
@@ -97,7 +98,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="psurveyl">Client Survey Link</label>
-                                    <input type="text" class="form-control" name="client_survey_url" value="{{$project->client_survey_url}}" placeholder="Enter Survey Link">
+                                    <input type="text" class="form-control" readonly name="client_survey_url" value="{{$project->client_survey_url}}" placeholder="Enter Survey Link">
                                 </div>
                             </div>
                         </div>
@@ -108,25 +109,23 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="pcompletel">Complete</label>
-                                    <input type="text" class="form-control" name="complete_url" value="{{$project->complete_url}}" placeholder="Enter Survey Complete Redirect">
+                                    <input type="text" class="form-control" readonly name="complete_url" value="{{$project->complete_url}}" placeholder="Enter Survey Complete Redirect">
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="psurveyl">Disqualify</label>
-                                    <input type="text" class="form-control" name="disqualify_url" value="{{$project->disqualify_url}}" placeholder="Enter Disqualify Redirect ">
+                                    <input type="text" class="form-control" readonly name="disqualify_url" value="{{$project->disqualify_url}}" placeholder="Enter Disqualify Redirect ">
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="pquotal">Quotafull</label>
-                                    <input type="text" class="form-control" name="quotafull_url" value="{{$project->quotafull_url}}" placeholder="Enter Quotafull Redirect">
+                                    <input type="text" class="form-control" readonly name="quotafull_url" value="{{$project->quotafull_url}}" placeholder="Enter Quotafull Redirect">
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="pqualityl">Quality Team</label>
-                                    <input type="text" class="form-control" name="quality_url" value="{{$project->quality_term_url}}" placeholder="Enter Quality Team Redirect">
+                                    <input type="text" class="form-control" readonly name="quality_url" value="{{$project->quality_term_url}}" placeholder="Enter Quality Team Redirect">
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" name="pki_project_id" value="{{$project->pki_project_id}}"/>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a class="btn btn-secondary" href="{{route('projects.show', $project->pki_project_id)}}">Cancel</a>
                     </form>
                 </div>
             </div>

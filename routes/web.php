@@ -27,6 +27,12 @@ Route::get('/projects', [
 ]);
 
 Route::get('/projects/{id}', [
+    'uses'=>'ProjectController@show',
+    'as'=>'projects.show',
+    'middleware'=>'auth'
+]);
+
+Route::get('/projects/{id}/edit', [
     'uses'=>'ProjectController@edit',
     'as'=>'projects.edit',
     'middleware'=>'auth'
@@ -81,6 +87,12 @@ Route::post('/vendordetails/store', [
 ]);
 
 Route::get('/vendordetails/{vendor_id}', [
+    'uses'=>'VendorDetailController@show',
+    'as'=>'vendordetails.show',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendordetails/{vendor_id}/edit', [
     'uses'=>'VendorDetailController@edit',
     'as'=>'vendordetails.edit',
     'middleware'=>'auth'
