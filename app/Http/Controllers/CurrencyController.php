@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Currency;
+use Illuminate\Support\Facades\Http;
 
 class CurrencyController extends Controller
 {
@@ -60,5 +61,46 @@ class CurrencyController extends Controller
 
         return redirect()->route('currencies.index')
             ->with('success', 'Currency deleted successfully');
+    }
+
+    public function addCurrencies()
+    {
+        try {
+            $response = Http::get('https://openexchangerates.org/api/currencies.json');
+            // $data = $response->json();
+            $data = $response->json();
+            foreach($data as $index=>$currency){
+                $currencies = [];
+                $currencies = [
+                    'currency' => $currency,
+                    'code' => $index,
+                    'created' => \Carbon\Carbon::now(),
+                    'updated' => \Carbon\Carbon::now()
+                ];
+                Currency::addCurrencies($currencies);
+            }
+            return response([
+                'success' => true,
+                'message' => 'OK',
+                'data' => "All Currencies Added"
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayQueryException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ])->header("Access-Control-Allow-Origin", "*");
+        }
     }
 }

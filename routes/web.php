@@ -28,11 +28,11 @@ Route::get('/projects', [
 
 Route::get('/projects/{id}', [
     'uses'=>'ProjectController@show',
-    'as'=>'projects.show',
+    'as'=>'projects.edit',
     'middleware'=>'auth'
 ]);
 
-Route::get('/projects/{id}/edit', [
+Route::get('/projects/edit/{id}', [
     'uses'=>'ProjectController@edit',
     'as'=>'projects.edit',
     'middleware'=>'auth'
@@ -44,9 +44,21 @@ Route::post('/project/store', [
     'middleware'=>'auth'
 ]);
 
+Route::post('/project/existingstore', [
+    'uses'=>'ProjectController@existingStore',
+    'as'=>'projects.existingstore',
+    'middleware'=>'auth'
+]);
+
 Route::post('/project/update', [
     'uses'=>'ProjectController@update',
     'as'=>'projects.update',
+    'middleware'=>'auth'
+]);
+
+Route::post('/project/remove', [
+    'uses'=>'ProjectController@remove',
+    'as'=>'projects.remove',
     'middleware'=>'auth'
 ]);
 
@@ -56,15 +68,45 @@ Route::get('/clients', [
     'middleware'=>'auth'
 ]);
 
-Route::get('/clients/create', [
-    'uses'=>'ClientController@create',
-    'as'=>'clients.create',
+Route::post('/clients/store', [
+    'uses'=>'ClientController@store',
+    'as'=>'clients.store',
     'middleware'=>'auth'
 ]);
 
-Route::post('/clients/create', [
-    'uses'=>'ClientController@store',
-    'as'=>'clients.store',
+Route::get('/clients/edit/{client_id}', [
+    'uses'=>'ClientController@edit',
+    'as'=>'clients.edit',
+    'middleware'=>'auth'
+]);
+
+Route::post('/clients/update', [
+    'uses'=>'ClientController@update',
+    'as'=>'clients.update',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendors', [
+    'uses'=>'VendorController@index',
+    'as'=>'vendors.index',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendors/store', [
+    'uses'=>'VendorController@store',
+    'as'=>'vendors.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/vendors/edit/{vendor_id}', [
+    'uses'=>'VendorController@edit',
+    'as'=>'vendors.edit',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendors/update', [
+    'uses'=>'VendorController@update',
+    'as'=>'vendors.update',
     'middleware'=>'auth'
 ]);
 
@@ -101,6 +143,18 @@ Route::get('/vendordetails/{vendor_id}/edit', [
 Route::post('/vendordetails/update', [
     'uses'=>'VendorDetailController@update',
     'as'=>'vendordetails.update',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendordetails/remove', [
+    'uses'=>'VendorDetailController@remove',
+    'as'=>'vendordetails.remove',
+    'middleware'=>'auth'
+]);
+
+Route::get('/getVendorsByProject/{project_id}', [
+    'uses'=>'VendorDetailController@getVendorsByProject',
+    'as'=>'vendordetails.getVendorsByProject',
     'middleware'=>'auth'
 ]);
 
@@ -146,6 +200,12 @@ Route::get('/survey-response/{urlId}', [
 
 Route::get('/survey/{urlId}', [
     'uses'=>'RedirectController@redirectSurvey'
+]);
+
+Route::get('/redirect', [
+    'uses'=>'RedirectController@finalRedirect',
+    'as'=>'projects.redirects.redirect',
+    'middleware'=>'auth'
 ]);
 
 require __DIR__.'/auth.php';

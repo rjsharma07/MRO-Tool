@@ -3,48 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Vendor;
 use App\Models\VendorDetail;
 use App\Models\Project;
 use App\Models\Country;
+use App\Models\ProjectStatus;
 use Illuminate\Support\Str;
 
 class VendorDetailController extends Controller
 {
     public function index()
     {
-        $vendordetails = VendorDetail::all();
-        foreach($vendordetails as $vendordetail){
-            $vendorOb[] = VendorDetail::getVendorDetails($vendordetail->pki_vendordetail_id);
-        }
+        $vendordetails = VendorDetail::getVendorDetails();
+        $projectStatuses = ProjectStatus::all();
         return view('vendordetails.index', [
-            'vendordetails'=>$vendorOb
+            'vendordetails'=>$vendordetails,
+            'projectstatuses'=>$projectStatuses
         ]);
-    }
-
-    public function create()
-    {
-        //
     }
 
     public function store(Request $request)
-    {   
+    {
         $request->validate([
-            'vendor' => 'required',
             'fki_project_id' => 'required|integer',
+            'fki_vendor_id' => 'required',
             'cpi' => 'required',
             'required_completes' => 'required'
         ]);
-        
+        $vendor = Vendor::where('pki_vendor_id', $request->fki_vendor_id)->first();
         \DB::beginTransaction();
         $vendorOb = new VendorDetail();
-        $vendorOb->vendor = $request->vendor;
+        $vendorOb->fki_vendor_id = $request->fki_vendor_id;
         $vendorOb->fki_project_id = $request->fki_project_id;
         $vendorOb->cpi = $request->cpi;
         $vendorOb->required_completes = $request->required_completes;
+        $vendorOb->complete_url = $vendor->complete_url;
+        $vendorOb->disqualify_url = $vendor->disqualify_url;
+        $vendorOb->quotafull_url = $vendor->quotafull_url;
+        $vendorOb->quality_term_url = $vendor->quality_term_url;
+        $vendorOb->survey_check = $request->survey_check;
         $vendorOb->created = \Carbon\Carbon::now();
         $vendorOb->updated = \Carbon\Carbon::now();
         $vendorOb->survey_url = "";
-        $vendorOb->save();
         $urlToken = Str::uuid();
         $vendorOb->survey_url = $request->getHost()."/survey/".$urlToken.$vendorOb->pki_vendordetail_id."?pid=";
         $vendorOb->save();
@@ -54,25 +54,23 @@ class VendorDetailController extends Controller
                 ->route('vendordetails.edit', $vendorOb->pki_vendordetail_id);
     }
 
-    public function edit($vendor_id)
+    public function edit($vendordetail_id)
     {   
-        $vendor = VendorDetail::find($vendor_id);
-        $project = Project::find($vendor->fki_project_id);
+        $vendor = VendorDetail::getVendorDetails($vendordetail_id);
         $countries = Country::all();
         return view('vendordetails.edit', [
             'vendor'=>$vendor,
-            'project'=>$project,
             'countries'=>$countries
         ]);
     }
 
     public function show($vendor_id)
     {   
-        $vendor = VendorDetail::find($vendor_id);
-        $project = Project::find($vendor->fki_project_id);
+        $vendorDetail = VendorDetail::find($vendor_id);
+        $project = Project::find($vendorDetail->fki_project_id);
         $countries = Country::all();
         return view('vendordetails.show', [
-            'vendor'=>$vendor,
+            'vendor'=>$vendorDetail,
             'project'=>$project,
             'countries'=>$countries
         ]);
@@ -111,16 +109,77 @@ class VendorDetailController extends Controller
             $vendor->save();
 
             return redirect()
-                ->route('vendordetails.show', $vendor->pki_vendordetail_id);
-            
+                ->to('/projects/edit/'.$vendor->fki_project_id.'#vendordetails')
+                ->with('success', 'Vendor details updated successfully!');
         }
     }
 
-    public function destroy(Client $client)
+    public function remove(Request $request)
     {
-        $client->delete();
+        VendorDetail::updateVendorDetails($request->vendordetail_id, [
+            'active' => 0
+        ]);
+        return redirect()->back()->with('success', 'Vendor details removed successfully!');
+    }
 
-        return redirect()->route('client.index')
-            ->with('success', 'Client deleted successfully');
+    public function getVendorDetailsById($vendor_id)
+    {
+        try {
+            $details = VendorDetail::getVendorDetailsById($vendor_id);
+            return response([
+                'success' => true,
+                'message' => 'OK',
+                'data' => $details
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayQueryException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ])->header("Access-Control-Allow-Origin", "*");
+        }
+    }
+
+    public function updateProjectStatus($vendordetail_id, Request $request)
+    {
+        try {
+            $data = [
+                'fki_projectstatus_id' => $request->fki_projectstatus_id
+            ];
+            $response = VendorDetail::updateVendorDetails($vendordetail_id, $data);
+            return response([
+                'success' => true,
+                'message' => 'OK',
+                'data' => $response
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayQueryException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ])->header("Access-Control-Allow-Origin", "*");
+        }
     }
 }

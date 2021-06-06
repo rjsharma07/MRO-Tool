@@ -13,4 +13,9 @@ class Currency extends Model
     protected $primaryKey = 'pki_currency_id';
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
+
+    public static function addCurrencies($data)
+    {
+        return Currency::insert($data);
+    }
 }

@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('project/{project_id}', 'ProjectController@getProjectDetails');
+Route::post('project/updateStatus/{project_id}', 'ProjectController@updateProjectStatus');
+Route::post('country/add', 'CountryController@addCountries');
+Route::post('currency/add', 'CurrencyController@addCurrencies');
+
+Route::get('vendor/{vendordetail_id}', 'VendorDetailController@getVendorDetailsById');
+Route::post('vendorDetail/updateStatus/{vendordetail_id}', 'VendorDetailController@updateProjectStatus');

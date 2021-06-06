@@ -13,4 +13,16 @@ class VendorProjectDetail extends Model
     protected $primaryKey = 'pki_vendorprojectdetail_id';
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
+
+    public static function getVendorProjectDetailsLOI($vendordetail_id){
+        return VendorProjectDetail::select(
+            'vendorprojectdetails.pki_vendorprojectdetail_id',
+            'vendorprojectdetails.entered',
+            'vendorprojectdetails.exited'
+        )
+                        ->where('fki_vendordetail_id', $vendordetail_id)
+                        ->whereNotNull('entered')
+                        ->whereNotNull('exited')
+                        ->get(); 
+    }
 }

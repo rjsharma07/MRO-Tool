@@ -16,21 +16,23 @@ class CreateVendordetailsTable extends Migration
         Schema::create('vendordetails', function (Blueprint $table) {
             $table->bigIncrements('pki_vendordetail_id');
             $table->bigInteger('fki_project_id')->unsigned();
-            $table->bigInteger('fki_status_id')->unsigned()->default(0);
-            $table->bigInteger('fki_industrytype_id')->unsigned()->nullable();
-            $table->bigInteger('fki_country_id')->unsigned()->nullable();
-            $table->string('vendor');
+            $table->bigInteger('fki_vendor_id')->unsigned();
+            $table->bigInteger('fki_projectstatus_id')->unsigned()->default(0);
             $table->text('survey_url');
             $table->float('cpi');
             $table->integer('loi')->nullable();
             $table->bigInteger('ir')->nullable();
             $table->bigInteger('hits')->default(0);
             $table->bigInteger('required_completes');
-            $table->bigInteger('completes')->default(0);
+            $table->bigInteger('completes_count')->unsigned()->default(0);
+            $table->bigInteger('disqualify_count')->unsigned()->default(0);
+            $table->bigInteger('quality_term_count')->unsigned()->default(0);
+            $table->bigInteger('quota_full_count')->unsigned()->default(0);
             $table->text('complete_url')->nullable();
             $table->text('disqualify_url')->nullable();
             $table->text('quotafull_url')->nullable();
             $table->text('quality_term_url')->nullable();
+            $table->boolean('survey_check')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->boolean('active')->default(1);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+use Illuminate\Support\Facades\Http;
 
 class CountryController extends Controller
 {
@@ -60,5 +61,45 @@ class CountryController extends Controller
 
         return redirect()->route('countries.index')
             ->with('success', 'Country deleted successfully');
+    }
+
+    public function addCountries()
+    {
+        try {
+            $response = Http::get('https://api.printful.com/countries');
+            $data = $response->json();
+            $countries = [];
+            foreach($data['result'] as $index=>$country){
+                $countries[$index] = [
+                    'country' => $country['name'],
+                    'code' => $country['code'],
+                    'created' => \Carbon\Carbon::now(),
+                    'updated' => \Carbon\Carbon::now()
+                ];
+                Country::addCountries($countries[$index]);
+            }
+            return response([
+                'success' => true,
+                'message' => 'OK',
+                'data' => "All Countries Added"
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (FunstayQueryException $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ])->header("Access-Control-Allow-Origin", "*");
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ])->header("Access-Control-Allow-Origin", "*");
+        }
     }
 }

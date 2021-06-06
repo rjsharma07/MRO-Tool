@@ -1,10 +1,24 @@
 .btn-panel {
-    width: 100%;
-    margin: 15px 0px;
-    overflow: hidden;
-}
-.btn-panel button, .btn-panel a {
     float: right;
+    cursor: pointer;
+}
+.success-msg, .error-msg {
+    position: fixed;
+    right: 50px;
+    top: 90px;
+    z-index: 5;
+    background-color: rgba(105,7,107,0.6);
+    padding: 6px 14px;
+    border-radius: 10px;
+    transition: all 1s linear;
+}
+.flash-msg {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 600;
+}
+.active {
+    display: block!important;
 }
 .table-outer {
     width: 100%;
@@ -39,4 +53,215 @@
 .vendors-outer table tr td, .vendordetails-outer table tr td {
     width: 100px;
     word-wrap: break-word;
+    text-align: center;
 }
+.table td.span-cols, .table th.span-cols{
+    text-align: center;
+    width: 240px;
+}
+.menu-icon {
+    position: fixed;
+    left: 2em;
+    top: 2em;
+    z-index: 2;
+    cursor: pointer;
+}
+.secondary-menu-outer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.secondary-menu-outer .menu-itm {
+    margin-left: 15px;
+}
+.secondary-menu-outer .menu-itm a {
+    font-family: 'Newsreader', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1.5px;
+    padding: 0.7rem 1.7rem;
+    background: #d11945;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+.secondary-menu-outer .menu-itm a:hover {
+    background-color: #940124;
+    text-decoration: none;
+}
+#disableEdit, #disableVendorEdit, #vsubmit, #vcancel, #psubmit {
+    display: none;
+}
+#addVendor {
+    margin-left: 30px;
+}
+#vendordetails, #projectdetails{
+    display: none;
+    transition: all 2s;
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
+#vendordetails {
+    margin-top: 30px;
+}
+#detailModal.modal {
+    top: 12%;
+}
+.project-id {
+    margin-bottom: 15px;
+}
+.menu-icon .fa {
+    font-size: 1.6rem;
+}
+.custom-bg-lpurple {
+    background: rgb(105,7,107);
+background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100%);
+}
+.btn-primary {
+    background-color: #4ca1a3;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #7954A1;
+}
+.menu-icon .fa, .custom-nav-head {
+    color: #EFDCF9;
+}
+.custom-nav-head {
+    font-size: 1.7em;
+}
+.custom-nav-head .fa{
+    margin-right: 10px;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: #EFEBE2;
+}
+.custom-page-bg {
+    background-color: #F8FAFD;
+}
+.header-custom {
+    min-height: 74px;
+    margin-bottom: 30px;
+}
+.header-custom h2 {
+    display: table;
+    float: left;
+    font-family: 'Newsreader', serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    word-spacing: 2px;
+    margin-bottom: 0;
+}
+.header-custom span {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-left: 50px;
+}
+.btn {
+    color: #fff;
+    min-width: 40px;
+}
+.btn-custom-view {
+    background-color: #9b3675;
+}
+.btn-custom-edit {
+    background-color: #7eca9c;
+}
+.modal-custom-btn, .modal-custom-btn:focus {
+    outline: none;
+}
+#vendor-details .btn-panel {
+    margin-bottom: 50px;
+}
+.project-status {
+    min-width: 150px;
+    padding-right: 2rem;
+}
+#vendor-btn-panel {
+    display: none;
+}
+#vendor-details {
+    margin-top: 30px;
+}
+.copy-url-cont {
+    position: relative;
+}
+.flash-copy {
+    visibility: hidden;
+    position: absolute;
+    left: -74px;
+    z-index: 5;
+    top: -35px;
+    width: 265px;
+    padding: 3px 15px;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    text-align: center;
+    transition: all 0.8s linear;
+    border-radius: 7px;
+    opacity: 0;
+}
+.span-cols button, .span-cols a, .span-cols form {
+    display: inline;
+}
+.span-cols button {
+    margin-bottom: 0;
+}
+.v-span-cols {
+    width: 180px;
+}
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100%);
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+  }
+  .input-copy, .input-copy:hover, .input-copy, .input-copy:focus {
+    position: absolute;
+    left: -999em;
+  }
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: rgba(255,255,255,0.5);
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

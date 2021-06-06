@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class ProjectStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'countries';
-    protected $primaryKey = 'pki_country_id';
+    protected $table = 'projectstatuses';
+    protected $primaryKey = 'pki_projectstatus_id';
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
-
-    public static function addCountries($data)
-    {
-        return Country::insert($data);
-    }
 }

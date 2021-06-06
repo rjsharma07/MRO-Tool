@@ -16,6 +16,8 @@ class CreateCurrenciesTable extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('pki_currency_id');
             $table->string('currency', 50)->unique();
+            $table->string('code')->unique();
+            $table->string('symbol')->nullable();
             $table->string('value')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');

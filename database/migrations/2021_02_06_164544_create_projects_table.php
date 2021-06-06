@@ -19,10 +19,9 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('fki_user_id')->unsigned();
             $table->bigInteger('fki_country_id')->unsigned()->nullable();
             $table->bigInteger('fki_currency_id')->unsigned()->nullable();
-            $table->bigInteger('fki_status_id')->unsigned()->default(0);
-            $table->bigInteger('fki_industrytype_id')->unsigned()->nullable();
+            $table->bigInteger('fki_projectstatus_id')->unsigned()->default(1);
             $table->integer('fki_security_id')->unsigned()->default(1);
-            $table->string('epo', 50)->unique();
+            $table->string('cui', 50);
             $table->string('name');
             $table->string('reference_name')->nullable();
             $table->string('subject');
@@ -32,7 +31,11 @@ class CreateProjectsTable extends Migration
             $table->float('cpi')->nullable();
             $table->bigInteger('hits')->default(0);
             $table->bigInteger('required_completes')->default(100);
-            $table->bigInteger('completes')->default(0);
+            $table->bigInteger('completes_count')->unsigned()->default(0);
+            $table->bigInteger('disqualify_count')->unsigned()->default(0);
+            $table->bigInteger('quality_term_count')->unsigned()->default(0);
+            $table->bigInteger('quota_full_count')->unsigned()->default(0);
+            $table->bigInteger('survey_visited_count')->unsigned()->default(0);
             $table->text('client_survey_url')->nullable();
             $table->text('complete_url')->nullable();
             $table->text('disqualify_url')->nullable();

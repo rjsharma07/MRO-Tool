@@ -20,6 +20,9 @@ class CreateProjectdetailsTable extends Migration
             $table->bigInteger('fki_vendordetail_id')->unsigned();
             $table->bigInteger('fki_vendorprojectdetail_id')->unsigned();
             $table->string('respondent_id');
+            $table->string('ip')->nullable();
+            $table->dateTime('entered')->nullable();
+            $table->dateTime('exited')->nullable();
             $table->dateTime('created');
             $table->dateTime('updated');
             $table->boolean('active')->default(1);

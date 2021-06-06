@@ -16,11 +16,6 @@ class Project extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
 
-    public static function getProjects(){
-        $project = Project::all();
-        return $project;
-    }
-
     public function vendors() {
         return $this->hasMany(VendorDetail::class, "fki_project_id");
     }
@@ -45,4 +40,78 @@ class Project extends Model
         return $this->save();
     }
 
+    public static function getProjects(){
+        return Project::select(
+            'projects.pki_project_id',
+            'projects.fki_projectstatus_id',
+            'projects.name',
+            'projects.subject',
+            'projects.loi',
+            'projects.ir',
+            'projects.cpi',
+            'projects.required_completes',
+            'projects.completes_count',
+            'projects.disqualify_count',
+            'projects.survey_visited_count',
+            'users.name as manager',
+            'clients.pki_client_id',
+            'clients.client',
+            'clients.client',
+            'countries.pki_country_id',
+            'countries.country'
+        )
+                        ->join(
+                            'users',
+                            'users.pki_user_id',
+                            '=',
+                            'projects.fki_user_id'
+                        )
+                        ->join(
+                            'clients',
+                            'clients.pki_client_id',
+                            '=',
+                            'projects.fki_client_id'
+                        )
+                        ->join(
+                            'countries',
+                            'countries.pki_country_id',
+                            '=',
+                            'projects.fki_country_id'
+                        )
+                        ->where('projects.status', 1)
+                        ->get(); 
+    }
+
+    public static function getProjectDetails($project_id){
+        return Project::select(
+            'projects.pki_project_id',
+            'projects.name',
+            'projects.subject',
+            'projects.loi',
+            'projects.ir',
+            'projects.cpi',
+            'projects.required_completes',
+            'projects.client_survey_url',
+            'projects.completes_count',
+            'projects.complete_url',
+            'projects.disqualify_url',
+            'projects.quotafull_url',
+            'projects.quality_term_url',
+            'users.name as user_name'
+        )
+                        ->join(
+                            'users',
+                            'users.pki_user_id',
+                            '=',
+                            'projects.fki_user_id'
+                        )
+                        ->where('pki_project_id', $project_id)
+                        ->first(); 
+    }
+
+    public static function updateProjectDetails($project_id, $data)
+    {
+        return Project::where('pki_project_id', $project_id)
+                        ->update($data);
+    }
 }
