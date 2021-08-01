@@ -261,6 +261,27 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
     padding: 15px 0;
     border-top: 1px solid #dee2e6; 
 }
+.bgc-pending {
+    background-color: #ffeb3b;
+}
+.bgc-live {
+    background-color: #00e676;
+}
+.bgc-pause{
+    background-color: #f44336;
+}
+.bgc-closed{
+    background-color: #ff9100;
+}
+.bgc-completed{
+    background-color: #673ab7;
+}
+.bgc-cancelled{
+    background-color: #b22a00;
+}
+.bgc-nocomp{
+    background-color: #ab003c;
+}
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */

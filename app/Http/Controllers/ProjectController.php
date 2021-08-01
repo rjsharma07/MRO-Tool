@@ -29,6 +29,7 @@ class ProjectController extends Controller
         $projectstatuses = ProjectStatus::all();
         $calculated_loi = [];
         $calculated_ir = [];
+        $statusColors = ['bgc-pending', 'bgc-live', 'bgc-pause', 'bgc-closed', 'bgc-completed', 'bgc-cancelled', 'bgc-nocomp'];
         foreach($projects as $project){
             $total = 0;
             $projectDetails = ProjectDetail::getProjectLOI($project->pki_project_id);
@@ -51,7 +52,8 @@ class ProjectController extends Controller
             'users'=>$users,
             'projectstatuses'=>$projectstatuses,
             'calculated_loi'=>$calculated_loi,
-            'calculated_ir'=>$calculated_ir
+            'calculated_ir'=>$calculated_ir,
+            'statusColors'=>$statusColors
         ]);
     }
 

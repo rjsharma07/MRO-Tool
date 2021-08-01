@@ -58,8 +58,8 @@
                             <td>{{$project->completes_count}} / {{$project->required_completes}}</td>
                             <td class="span-cols-status">
                                 <select class="project-status" data-projectid="{{$project->pki_project_id}}" data-cui="{{$project->cui}}">
-                                    @foreach($projectstatuses as $status)
-                                        <option value="{{$status->pki_projectstatus_id}}" {{ ( $status->pki_projectstatus_id == $project->fki_projectstatus_id) ? 'selected' : '' }}>{{$status->status}}</option>
+                                    @foreach($projectstatuses as $indx=>$status)
+                                        <option value="{{$status->pki_projectstatus_id}}" class="{{$statusColors[$indx]}}" {{ ( $status->pki_projectstatus_id == $project->fki_projectstatus_id) ? 'selected' : '' }}>{{$status->status}}</option>
                                     @endforeach
                                 </select>
                             </td>
