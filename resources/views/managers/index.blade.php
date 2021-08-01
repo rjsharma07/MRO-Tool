@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl custom-nav-head leading-tight">
-        <i class="fa fa-user"></i>{{ __('Users') }}
+        <i class="fa fa-user"></i>{{ __('Managers') }}
         </h2>
         <div class="btn-panel">
-            <span id="addUser">Add User</span>
+            <span id="addUser">Add Manager</span>
         </div>
     </x-slot>
 
@@ -49,7 +49,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add User</h5>
+                <h5 class="modal-title">Add Manager</h5>
                 <button id="close-user-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -77,7 +77,7 @@
                         <div class="row">    
                             <div class="col-sm-12">
                                 <label>Password</label>
-                                <input type="email" name="password" class="form-control" required>
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                         </div>
                     </div>
