@@ -176,7 +176,7 @@
                                 <form method="POST" action="{{route('projects.store')}}">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="cui_name" class="form-control" required>
+                                        <input type="text" name="cui_name" class="form-control" placeholder="Enter CUI e.g. CUI_543583" required>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" name="existingSubmit" class="btn btn-primary">Create</button>
