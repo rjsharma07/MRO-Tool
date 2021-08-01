@@ -98,14 +98,14 @@
                     <div class="modal-body">
                         <ul class="nav nav-pills nav-fill">
                             <li class="nav-item">
-                                <a id="new-cui-tab" class="nav-link active" href="#">New CUI</a>
+                                <a id="new-cui-tab" class="nav-link p-active" href="#">New CUI</a>
                             </li>
                             <li class="nav-item">
                                 <a id="existing-cui-tab" class="nav-link" href="#">Existing CUI</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane active" id="new-cui" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane p-active" id="new-cui" role="tabpanel" aria-labelledby="home-tab">
                                 <form class="addProjectForm" method="POST" action="{{route('projects.store')}}">
                                 @csrf
                                     <div class="form-group">

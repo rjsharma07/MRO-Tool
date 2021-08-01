@@ -24,6 +24,9 @@
     font-weight: 600;
 }
 .active {
+    display: block!important;
+}
+.p-active {
     display: block;
 }
 .table-outer {
