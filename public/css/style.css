@@ -278,7 +278,7 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
   .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 1.4rem;
     color: #fff;
     display: block;
     transition: 0.3s;
