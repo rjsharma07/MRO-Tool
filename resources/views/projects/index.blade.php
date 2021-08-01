@@ -340,7 +340,7 @@
                             $('#notCheckedData').append(html);
                         });
                     } else {
-                        $('#projectActions').append('<button id="costAction" class="btn btn-success" data-projectid="{{$project->pki_project_id}}">Cost</button>');
+                        //$('#projectActions').append('<button id="costAction" class="btn btn-success" data-projectid="{{$project->pki_project_id}}">Cost</button>');
                     }
                     if(response.status == 1){
                         $('#idsModal').hide();
