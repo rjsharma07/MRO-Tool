@@ -24,7 +24,7 @@
     font-weight: 600;
 }
 .active {
-    display: block!important;
+    display: block;
 }
 .table-outer {
     width: 100%;

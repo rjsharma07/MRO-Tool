@@ -64,7 +64,6 @@ $('#close-cost-btn').on('click', function () {
 
 $('#new-cui-tab').on('click', function (e) {
     e.preventDefault();
-    console.log("Hello");
     $('#new-cui').show();
     $(this).addClass('active');
     $('#existing-cui').hide();

@@ -109,12 +109,10 @@
                                 <form class="addProjectForm" method="POST" action="{{route('projects.store')}}">
                                 @csrf
                                     <div class="form-group">
-                                        <label>Project Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Project Name" required>
+                                        <input type="text" name="name" class="form-control" placeholder="Enter Project Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Subject Line</label>
-                                        <input type="text" name="subject" class="form-control" placeholder="Project Subject Line" required>
+                                        <input type="text" name="subject" class="form-control" placeholder="Enter Project Subject Line" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
