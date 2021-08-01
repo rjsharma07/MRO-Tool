@@ -57,7 +57,7 @@
                             <td>{{$project->survey_visited_count}}</td>
                             <td>{{$project->completes_count}} / {{$project->required_completes}}</td>
                             <td class="span-cols-status">
-                                <select id="pStat" class="project-status" data-projectid="{{$project->pki_project_id}}" data-cui="{{$project->cui}}">
+                                <select class="project-status" data-projectid="{{$project->pki_project_id}}" data-cui="{{$project->cui}}">
                                     @foreach($projectstatuses as $indx=>$status)
                                         <option value="{{$status->pki_projectstatus_id}}" {{ ( $status->pki_projectstatus_id == $project->fki_projectstatus_id) ? 'selected' : '' }}>{{$status->status}}</option>
                                     @endforeach
