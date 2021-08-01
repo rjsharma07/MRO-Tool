@@ -57,9 +57,9 @@
                             <td>{{$project->survey_visited_count}}</td>
                             <td>{{$project->completes_count}} / {{$project->required_completes}}</td>
                             <td class="span-cols-status">
-                                <select class="project-status" data-projectid="{{$project->pki_project_id}}" data-cui="{{$project->cui}}">
+                                <select id="pStat" class="project-status" data-projectid="{{$project->pki_project_id}}" data-cui="{{$project->cui}}">
                                     @foreach($projectstatuses as $indx=>$status)
-                                        <option value="{{$status->pki_projectstatus_id}}" class="{{$statusColors[$indx]}}" {{ ( $status->pki_projectstatus_id == $project->fki_projectstatus_id) ? 'selected' : '' }}>{{$status->status}}</option>
+                                        <option value="{{$status->pki_projectstatus_id}}" {{ ( $status->pki_projectstatus_id == $project->fki_projectstatus_id) ? 'selected' : '' }}>{{$status->status}}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -292,7 +292,30 @@
         $('#close-detail-btn').on('click', function() {
             $('#detailModal').hide();
         });
-
+        $('#pStat').on('change', function() {
+            var stat = $(this).val();
+            if(stat == 1){
+                $('#pStat').addClass('bgc-pending');
+            }
+            if(stat == 2){
+                $('#pStat').addClass('bgc-live');
+            }
+            if(stat == 3){
+                $('#pStat').addClass('bgc-pause');
+            }
+            if(stat == 4){
+                $('#pStat').addClass('bgc-closed');
+            }
+            if(stat == 5){
+                $('#pStat').addClass('bgc-complete');
+            }
+            if(stat == 6){
+                $('#pStat').addClass('bgc-cancelled');
+            }
+            if(stat == 7){
+                $('#pStat').addClass('bgc-nocomp');
+            }
+        });
 
         $('.project-status').on('change', function() {
             var projectId = $(this).attr('data-projectid');
