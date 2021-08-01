@@ -63,19 +63,19 @@ class Project extends Model
             'countries.pki_country_id',
             'countries.country'
         )
-                        ->join(
+                        ->leftJoin(
                             'users',
                             'users.pki_user_id',
                             '=',
                             'projects.fki_user_id'
                         )
-                        ->join(
+                        ->leftJoin(
                             'clients',
                             'clients.pki_client_id',
                             '=',
                             'projects.fki_client_id'
                         )
-                        ->join(
+                        ->leftJoin(
                             'countries',
                             'countries.pki_country_id',
                             '=',
