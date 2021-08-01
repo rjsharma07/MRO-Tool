@@ -63,11 +63,11 @@
 }
 .table td.span-cols-status, .table th.span-cols-status{
     text-align: center;
-    width: 160px;
+    width: 140px;
 }
 .table td.span-cols, .table th.span-cols{
     text-align: center;
-    width: 280px;
+    width: 115px;
 }
 .menu-icon {
     position: fixed;
@@ -191,6 +191,7 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
 .project-status {
     min-width: 150px;
     padding-right: 2rem;
+    border-radius: 20px;
 }
 #vendor-btn-panel {
     display: none;
