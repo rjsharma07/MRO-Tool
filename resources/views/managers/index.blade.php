@@ -24,18 +24,20 @@
                     <tbody>
                     @if($users)
                         @foreach($users as $user)
-                        <tr>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td class="span-cols">
-                                <a href="{{route('managers.edit', $user->pki_user_id)}}" class="btn btn-custom-edit">Edit</a>
-                                <form method="POST" action="{{route('managers.remove')}}">
-                                    @csrf
-                                    <input type="hidden" name="pki_user_id" value="{{$user->pki_user_id}}">
-                                    <input type="submit" class="btn btn-danger" value="Remove" onclick="alert('Are you sure you want to remove this user?')">
-                                </form>
-                            </td>
-                        </tr>
+                            @if($user->fki_role_id != 1)
+                            <tr>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td class="span-cols">
+                                    <a href="{{route('managers.edit', $user->pki_user_id)}}" class="btn btn-custom-edit">Edit</a>
+                                    <form method="POST" action="{{route('managers.remove')}}">
+                                        @csrf
+                                        <input type="hidden" name="pki_user_id" value="{{$user->pki_user_id}}">
+                                        <input type="submit" class="btn btn-danger" value="Remove" onclick="alert('Are you sure you want to remove this user?')">
+                                    </form>
+                                </td>
+                            </tr>
+                            @endif
                         @endforeach
                     @endif
                     </tbody>
