@@ -92,6 +92,36 @@ Route::post('/clients/remove', [
     'middleware'=>'auth'
 ]);
 
+Route::get('/managers', [
+    'uses'=>'UserController@index',
+    'as'=>'managers.index',
+    'middleware'=>'auth'
+]);
+
+Route::post('/managers/store', [
+    'uses'=>'UserController@store',
+    'as'=>'managers.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/managers/edit/{manager_id}', [
+    'uses'=>'UserController@edit',
+    'as'=>'managers.edit',
+    'middleware'=>'auth'
+]);
+
+Route::post('/managers/update', [
+    'uses'=>'UserController@update',
+    'as'=>'managers.update',
+    'middleware'=>'auth'
+]);
+
+Route::post('/managers/remove', [
+    'uses'=>'UserController@remove',
+    'as'=>'managers.remove',
+    'middleware'=>'auth'
+]);
+
 Route::get('/vendors', [
     'uses'=>'VendorController@index',
     'as'=>'vendors.index',

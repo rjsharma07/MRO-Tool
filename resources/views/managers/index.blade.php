@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl custom-nav-head leading-tight">
-        <i class="fa fa-user"></i>{{ __('Client') }}
+        <i class="fa fa-user"></i>{{ __('Users') }}
         </h2>
         <div class="btn-panel">
-            <span id="addClient">Add User</span>
+            <span id="addUser">Add User</span>
         </div>
     </x-slot>
 
@@ -17,7 +17,6 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -28,18 +27,11 @@
                         <tr>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>
-                            @if(isset($user->phone))
-                                {{$user->phone}}
-                            @else
-                                --
-                            @endif
-                            </td>
                             <td class="span-cols">
-                                <a href="{{route('users.edit', $user->pki_user_id)}}" class="btn btn-custom-edit">Edit</a>
-                                <form method="POST" action="{{route('users.remove')}}">
+                                <a href="{{route('managers.edit', $user->pki_user_id)}}" class="btn btn-custom-edit">Edit</a>
+                                <form method="POST" action="{{route('managers.remove')}}">
                                     @csrf
-                                    <input type="hidden" name="client_id" value="{{$user->pki_user_id}}">
+                                    <input type="hidden" name="pki_user_id" value="{{$user->pki_user_id}}">
                                     <input type="submit" class="btn btn-danger" value="Remove" onclick="alert('Are you sure you want to remove this user?')">
                                 </form>
                             </td>
@@ -51,30 +43,30 @@
             </div>
         </div>    
     </div>
-    <div id="clientModal" class="modal" tabindex="-1" role="dialog">
+    <div id="userModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Client</h5>
-                <button id="close-client-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">Add User</h5>
+                <button id="close-user-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('clients.store')}}">
+                <form method="POST" action="{{route('managers.store')}}">
                 @csrf
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
-                                <label>Client Name</label>
-                                <input type="text" name="client" class="form-control">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">    
                             <div class="col-sm-12">
-                                <label>Email</label>
+                                <label>Email/Username</label>
                                 <input type="email" name="email" class="form-control" required>
                             </div>
                         </div>
@@ -82,16 +74,8 @@
                     <div class="form-group">
                         <div class="row">    
                             <div class="col-sm-12">
-                                <label>Phone</label>
-                                <input type="text" name="phone" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">    
-                            <div class="col-sm-12">
-                                <label>Billing Address</label>
-                                <textarea class="form-control" name="address" rows="4"></textarea>
+                                <label>Password</label>
+                                <input type="email" name="password" class="form-control" required>
                             </div>
                         </div>
                     </div>

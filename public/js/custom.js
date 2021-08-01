@@ -30,6 +30,20 @@ $('#close-client-bottom').on('click', function () {
     $('body').css("overflow", "scroll");
 });
 
+$('#addUser').on('click', function () {
+    $('#userModal').show();
+    $('body').css("overflow", "hidden");
+});
+
+$('#close-user-btn').on('click', function () {
+    $('#userModal').hide();
+    $('body').css("overflow", "scroll");
+});
+$('#close-user-bottom').on('click', function () {
+    $('#userModal').hide();
+    $('body').css("overflow", "scroll");
+});
+
 $('#addVendor').on('click', function () {
     $('#vendorModal').show();
     $('body').css("overflow", "hidden");
