@@ -134,11 +134,12 @@ class VendorController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function remove(Request $request)
     {
-        $project->delete();
-
-        return redirect()->route('project.index')
-            ->with('success', 'Project deleted successfully');
+        Vendor::updateClient($request->vendor_id, [
+            'active' => 0
+        ]);
+        return redirect()->route('vendors.index')
+            ->with('success', 'Vendor removed successfully');
     }
 }

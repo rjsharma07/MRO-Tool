@@ -1,3 +1,9 @@
+.modal-content {
+    min-height: 70vh;
+}
+.form-group-custom {
+    margin-top: 30px;
+}
 .btn-panel {
     float: right;
     cursor: pointer;
@@ -55,9 +61,13 @@
     word-wrap: break-word;
     text-align: center;
 }
+.table td.span-cols-status, .table th.span-cols-status{
+    text-align: center;
+    width: 160px;
+}
 .table td.span-cols, .table th.span-cols{
     text-align: center;
-    width: 240px;
+    width: 280px;
 }
 .menu-icon {
     position: fixed;
@@ -65,6 +75,8 @@
     top: 2em;
     z-index: 2;
     cursor: pointer;
+    color: #fff;
+    font-weight: 900;
 }
 .secondary-menu-outer {
     display: flex;
@@ -99,7 +111,7 @@
 #addVendor {
     margin-left: 30px;
 }
-#vendordetails, #projectdetails{
+#vendordetails, #projectdetails, #idsModal, #costModal{
     display: none;
     transition: all 2s;
     transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
@@ -212,6 +224,41 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
 }
 .v-span-cols {
     width: 180px;
+}
+.table.dataTable th, .table.dataTable th {
+    text-align: center!important;
+}
+.project_ids {
+    margin-left: 1rem;
+}
+#idsForm {
+    margin: 30px;
+}
+.total-cost {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #c3c3c3;
+}
+.form-radio-custom {
+    display: flex;
+    align-items: center;
+}
+.form-radio-custom label {
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+.addProjectForm label {
+    font-size: 0.8rem;
+}
+.addProjectForm select {
+    width: 100%;
+    font-size: 0.8rem;
+    border-color: #ced4da;
+}
+.radio-group {
+    margin: 15px 0;
+    padding: 15px 0;
+    border-top: 1px solid #dee2e6; 
 }
 /* The side navigation menu */
 .sidenav {

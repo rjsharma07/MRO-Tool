@@ -21,6 +21,8 @@
 
                 <div class="menu-itm"><a id="reportsData" href="javascript:void(0);">Reports</a></div>
 
+                <div class="menu-itm"><a id="reportsData" href="javascript:void(0);">Invoice</a></div>
+
             </div>
         </div>
     </div>
@@ -165,7 +167,7 @@
         </div>
         <div id="vendordetails" class="table-outer bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <table class="table">
+                <table id="vdTable" class="table">
                     <div class="bg-custom">
                         <thead>
                             <tr>
@@ -226,11 +228,11 @@
                                 <td class="span-cols v-span-cols">
                                     <button class="btn btn-custom-view vendordetail-id" data-vendordetailid="{{$vendordetail->pki_vendordetail_id}}">View</button>
                                     <a href="{{route('vendordetails.edit', $vendordetail->pki_vendordetail_id)}}" class="btn btn-custom-edit" title="Click to edit vendor details">Edit</a>
-                                    <form method="POST" action="{{route('vendordetails.remove')}}">
+                                    <!-- <form method="POST" action="{{route('vendordetails.remove')}}">
                                         @csrf
                                         <input type="hidden" name="vendordetail_id" value="{{$vendordetail->pki_vendordetail_id}}">
                                         <input type="submit" class="btn btn-danger" value="Remove" onclick="alert('Are you sure you want to remove this project?')">
-                                    </form>
+                                    </form> -->
                                 </td>
                             </tr>
                         @endforeach

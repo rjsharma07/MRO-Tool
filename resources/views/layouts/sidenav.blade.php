@@ -7,4 +7,4 @@
 </div>
 
 <!-- Use any element to open the sidenav -->
-<div class="menu-icon"><span onclick="openNav()"><i class="fa fa-bars"></i></span></div>
+<div class="menu-icon"><span onclick="openNav()">MENU</span></div>

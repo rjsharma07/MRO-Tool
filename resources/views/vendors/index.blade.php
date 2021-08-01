@@ -8,61 +8,66 @@
         </div>
     </x-slot>
 
-    <div class="container">
-        <div class="row">
-            <div class="table-outer bg-white overflow-hidden shadow-sm sm:rounded-lg vendordetails-outer">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <table class="table">
-                        <div class="bg-custom">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Vendor</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Billing Address</th>
-                                    <th scope="col">Complete Url</th>
-                                    <th scope="col">Disqualify Url</th>
-                                    <th scope="col">Quotafull Url</th>
-                                    <th scope="col">Quality Term Url</th>
-                                    <th scope="col">Updated At</th>
-                                </tr>
-                            </thead>
-                        </div>
-                        <tbody>
-                        @if($vendors)
-                            @foreach($vendors as $vendor)
-                                <tr>
-                                    <td>{{$vendor->vendor}}</td>
-                                    <td>{{$vendor->email}}</td>
-                                    <td>
-                                    @if(isset($vendor->phone))
-                                        {{$vendor->phone}}
-                                    @else
-                                        --
-                                    @endif
-                                    </td>
-                                    <td>
-                                    @if(isset($vendor->billing_address))
-                                        {{$vendor->billing_address}}
-                                    @else
-                                        --
-                                    @endif
-                                    </td>
-                                    <td>{{$vendor->complete_url}}</td>
-                                    <td>{{$vendor->disqualify_url}}</td>
-                                    <td>{{$vendor->quotafull_url}}</td>
-                                    <td>{{$vendor->quality_term_url}}</td>
-                                    <td>{{$vendor->updated->format('d/m/Y h:m:i A')}}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
+    <div class="container-fluid">
+        <div class="table-outer bg-white overflow-hidden shadow-sm sm:rounded-lg vendordetails-outer">
+            <div class="p-6 bg-white border-b border-gray-200">
+                <table id="vTable" class="table">
+                    <div class="bg-custom">
+                        <thead>
+                            <tr>
+                                <th scope="col">Vendor</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Billing Address</th>
+                                <th scope="col">Complete Url</th>
+                                <th scope="col">Disqualify Url</th>
+                                <th scope="col">Quotafull Url</th>
+                                <th scope="col">Quality Term Url</th>
+                                <th scope="col" class="span-cols">Actions</th>
+                            </tr>
+                        </thead>
+                    </div>
+                    <tbody>
+                    @if($vendors)
+                        @foreach($vendors as $vendor)
+                            <tr>
+                                <td>{{$vendor->vendor}}</td>
+                                <td>{{$vendor->email}}</td>
+                                <td>
+                                @if(isset($vendor->phone))
+                                    {{$vendor->phone}}
+                                @else
+                                    --
+                                @endif
+                                </td>
+                                <td>
+                                @if(isset($vendor->billing_address))
+                                    {{$vendor->billing_address}}
+                                @else
+                                    --
+                                @endif
+                                </td>
+                                <td>{{$vendor->complete_url}}</td>
+                                <td>{{$vendor->disqualify_url}}</td>
+                                <td>{{$vendor->quotafull_url}}</td>
+                                <td>{{$vendor->quality_term_url}}</td>
+                                <td class="span-cols">
+                                    <a href="{{route('vendors.edit', $vendor->pki_vendor_id)}}" class="btn btn-custom-edit">Edit</a>
+                                    <form method="POST" action="{{route('vendors.remove')}}">
+                                        @csrf
+                                        <input type="hidden" name="vendor_id" value="{{$vendor->pki_vendor_id}}">
+                                        <input type="submit" class="btn btn-danger" value="Remove" onclick="alert('Are you sure you want to remove this vendor?')">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="row">
-            <div id="vendorModal" class="modal" tabindex="-1" role="dialog">
+        </div>  
+    </div>
+    <div id="vendorModal" class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -133,6 +138,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </x-app-layout>

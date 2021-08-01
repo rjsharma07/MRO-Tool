@@ -18,7 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('project/{project_id}', 'ProjectController@getProjectDetails');
+Route::get('getProjectIds/{cui}', 'ProjectController@getProjectIdsReceived');
 Route::post('project/updateStatus/{project_id}', 'ProjectController@updateProjectStatus');
+Route::post('project/saveReceivedIds', 'ProjectController@saveReceivedIds');
 Route::post('country/add', 'CountryController@addCountries');
 Route::post('currency/add', 'CurrencyController@addCurrencies');
 

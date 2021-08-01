@@ -1,3 +1,7 @@
+$('#pTable').DataTable();
+$('#vdTable').DataTable();
+$('#cTable').DataTable();
+$('#vTable').DataTable();
 $('#addProject').on('click', function () {
     $('#projectModal').show();
     $('body').css("overflow", "hidden");
@@ -51,6 +55,10 @@ $('#close-vendordetail-btn').on('click', function () {
 });
 $('#close-vendordetail-bottom').on('click', function () {
     $('#addVendorDetailModal').hide();
+    $('body').css("overflow", "scroll");
+});
+$('#close-cost-btn').on('click', function () {
+    $('#costModal').hide();
     $('body').css("overflow", "scroll");
 });
 
@@ -151,6 +159,10 @@ $('#disableVendorEdit').on('click', function (e) {
     $('#vsubmit').hide();
     $('#vcancel').hide();
     $(this).hide();
+});
+
+$('#close-id-btn').on('click', function () {
+    $('#idsModal').hide();
 });
 
 /* Set the width of the side navigation to 250px */

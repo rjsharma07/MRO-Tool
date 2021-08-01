@@ -86,6 +86,12 @@ Route::post('/clients/update', [
     'middleware'=>'auth'
 ]);
 
+Route::post('/clients/remove', [
+    'uses'=>'ClientController@remove',
+    'as'=>'clients.remove',
+    'middleware'=>'auth'
+]);
+
 Route::get('/vendors', [
     'uses'=>'VendorController@index',
     'as'=>'vendors.index',
@@ -107,6 +113,12 @@ Route::get('/vendors/edit/{vendor_id}', [
 Route::post('/vendors/update', [
     'uses'=>'VendorController@update',
     'as'=>'vendors.update',
+    'middleware'=>'auth'
+]);
+
+Route::post('/vendors/remove', [
+    'uses'=>'VendorController@remove',
+    'as'=>'vendors.remove',
     'middleware'=>'auth'
 ]);
 
@@ -205,6 +217,18 @@ Route::get('/survey/{urlId}', [
 Route::get('/redirect', [
     'uses'=>'RedirectController@finalRedirect',
     'as'=>'projects.redirects.redirect',
+    'middleware'=>'auth'
+]);
+
+Route::post('/receivedIds/store', [
+    'uses'=>'ProjectController@saveReceivedIds',
+    'as'=>'receivedIds.store',
+    'middleware'=>'auth'
+]);
+
+Route::get('/project/test/{id}', [
+    'uses'=>'ProjectController@test',
+    'as'=>'project.test',
     'middleware'=>'auth'
 ]);
 

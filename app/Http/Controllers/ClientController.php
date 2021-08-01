@@ -104,11 +104,12 @@ class ClientController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function remove(Request $request)
     {
-        $project->delete();
-
-        return redirect()->route('project.index')
-            ->with('success', 'Project deleted successfully');
+        Client::updateClient($request->client_id, [
+            'active' => 0
+        ]);
+        return redirect()->route('clients.index')
+            ->with('success', 'Client removed successfully');
     }
 }

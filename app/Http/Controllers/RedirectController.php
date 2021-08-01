@@ -12,9 +12,17 @@ use App\Models\ProjectDetail;
 use App\Models\VendorProjectDetail;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 
 class RedirectController extends Controller
 {
+    private $agent;
+
+    public function __construct(Agent $agent)
+    {
+        $this->agent = $agent;
+    }
+
     public function captureRedirect(Request $request, $urlId) {
         $pid = $request->get('pid');
 
@@ -100,13 +108,30 @@ class RedirectController extends Controller
     }
 
     public function redirectSurvey(Request $request, $urlId) {
+        $ip = '27.63.128.172';
         $pid = $request->get('pid');
         $vendorDetail = VendorDetail::where('survey_url', 'like', '%/survey/'.$urlId.'%')->first();
         $project = Project::where('pki_project_id', $vendorDetail->fki_project_id)->first();
         $completesCheck = ($vendorDetail->completes_count <= $vendorDetail->required_completes);
         $hitsCheck = ($vendorDetail->hits <= $vendorDetail->required_completes);
         $surveyCheck = ($vendorDetail->survey_check == 1) ? $completesCheck : $hitsCheck;
-        if($project->fki_projectstatus_id == 2 && $vendorDetail->fki_projectstatus_id == 2 && $surveyCheck){
+
+        $surveySecurity = null;
+        if($project->survey_security == 0){
+            $projectIpExist = VendorProjectDetails::where('ip', '=', $request->ip())->first();
+            $surveySecurity = ($projectIpExist == null);
+        } elseif($project->survey_security == 1){
+            $respondentIdExist = VendorProjectDetails::where('vendor_respondent_id', '=', $pid)->first();
+            $surveySecurity = ($respondentIdExist == null);
+        } elseif($project->survey_security == 2) {
+            $projectIpExist = VendorProjectDetails::where('ip', '=', $request->ip())->first();
+            $respondentIdExist = VendorProjectDetails::where('vendor_respondent_id', '=', $pid)->first();
+            $surveySecurity = ($projectIpExist == null && $respondentIdExist == null);
+        } else {
+            $surveySecurity = null;
+        }
+
+        if($this->agent->isRobot() == "false" && $project->fki_projectstatus_id == 2 && $vendorDetail->fki_projectstatus_id == 2 && $surveyCheck && $surveySecurity){
             //Increasing Project and VendorDetails Hits by 1
             $vendorDetail->project->hits++;
             $vendorDetail->project->save();
@@ -116,12 +141,20 @@ class RedirectController extends Controller
             //Generating tools unique Repondent Id 
             $projectRespId = "CRI_".mt_rand(1000000000, 9999999999);
             
+            //User Location Details
+            $location = \Location::get($ip);
+            dd($location->cityName);
             //Saving Record for Vendor Project Details
             $vendorOb = new VendorProjectDetail();
             $vendorOb->fki_project_id = $vendorDetail->fki_project_id;
             $vendorOb->fki_vendordetail_id = $vendorDetail->pki_vendordetail_id;
             $vendorOb->vendor_respondent_id = $pid;
             $vendorOb->respondent_id = $projectRespId;
+            $vendorOb->ip = $location->ip;
+            $vendorOb->device = $this->agent->device();
+            $vendorOb->city = $location->cityName;
+            $vendorOb->country = $location->countryName;
+            $vendorOb->zip = $location->zipCode;
             $vendorOb->entered = \Carbon\Carbon::now();
             $vendorOb->created = \Carbon\Carbon::now();
             $vendorOb->updated = \Carbon\Carbon::now();

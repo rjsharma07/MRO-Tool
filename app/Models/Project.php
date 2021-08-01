@@ -46,6 +46,7 @@ class Project extends Model
             'projects.fki_projectstatus_id',
             'projects.name',
             'projects.subject',
+            'projects.cui',
             'projects.loi',
             'projects.ir',
             'projects.cpi',
@@ -53,6 +54,8 @@ class Project extends Model
             'projects.completes_count',
             'projects.disqualify_count',
             'projects.survey_visited_count',
+            'projects.created',
+            'projects.updated',
             'users.name as manager',
             'clients.pki_client_id',
             'clients.client',
@@ -85,6 +88,7 @@ class Project extends Model
     public static function getProjectDetails($project_id){
         return Project::select(
             'projects.pki_project_id',
+            'projects.fki_country_id',
             'projects.name',
             'projects.subject',
             'projects.loi',
@@ -113,5 +117,18 @@ class Project extends Model
     {
         return Project::where('pki_project_id', $project_id)
                         ->update($data);
+    }
+
+    public static function getProjectsByCUI($cui){
+        return Project::select(
+            'projects.pki_project_id',
+            'projects.name',
+            'projects.subject',
+            'projects.cpi',
+            'projects.created',
+            'projects.updated',
+        )
+                        ->where('cui', $cui)
+                        ->get(); 
     }
 }
