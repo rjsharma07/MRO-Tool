@@ -24,6 +24,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::getProjects();
+        dd($projects);
         $clients = Client::all();
         $users = User::all();
         $projectstatuses = ProjectStatus::all();
