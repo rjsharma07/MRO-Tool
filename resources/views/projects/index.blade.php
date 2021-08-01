@@ -105,7 +105,7 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane p-active" id="new-cui" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="p-active" id="new-cui" role="tabpanel" aria-labelledby="home-tab">
                                 <form class="addProjectForm" method="POST" action="{{route('projects.store')}}">
                                 @csrf
                                     <div class="form-group">
