@@ -11,21 +11,20 @@
             <span id="addVendorDetail">Add Vendor Detail</span>
         </div>
     </x-slot>
-    <div class="secondary-menu-outer">
-        <div class="container-fluid">
-            <div class="row">
-                
-                <div class="menu-itm"><a id="projectData" href="javascript:void(0);">Project</a></div>
-            
-                <div class="menu-itm"><a id="vendorsData" href="javascript:void(0);">Vendor</a></div>
-
-                <div class="menu-itm"><a id="reportsData" href="javascript:void(0);">Reports</a></div>
-
-                <div class="menu-itm"><a id="reportsData" href="javascript:void(0);">Invoice</a></div>
-
-            </div>
-        </div>
-    </div>
+    <ul class="flex flex-wrap border-b border-gray-200 dark:border-gray-700 custom-secondary-nav">
+        <li id="projectData" class="mr-2">
+            <a href="{{ route('projects.index') }}" aria-current="page" class="{{ Request::is('projects/edit/*') ? 'nav-active' : '' }}">Projects</a>
+        </li>
+        <li id="vendorsData" class="mr-2">
+            <a href="{{ route('vendors.index') }}" class="{{ Request::is('vendors') ? 'nav-active' : '' }}">Vendors</a>
+        </li>
+        <li id="reportsData" class="mr-2">
+            <a href="javascript:void(0);" class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300">Reports</a>
+        </li>
+        <li id="reportsData" class="mr-2">
+            <a href="javascript:void(0);" class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300">Invoices</a>
+        </li>
+    </ul>
     <div class="container-fluid">
         <div id="projectdetails" class="active">
             <div class="project-form">

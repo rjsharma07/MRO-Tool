@@ -132,8 +132,7 @@
     font-size: 1.6rem;
 }
 .custom-bg-lpurple {
-    background: rgb(105,7,107);
-background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100%);
+    background-color: #1b2e54;
 }
 .btn-primary {
     background-color: #4ca1a3;
@@ -296,7 +295,7 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100%);
+    background: #1b2e54;
   }
   
   /* The navigation menu links */
@@ -336,4 +335,14 @@ background: linear-gradient(90deg, rgba(105,7,107,1) 49%, rgba(179,14,208,1) 100
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+
+
+  .custom-secondary-nav .nav-active {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .custom-secondary-nav li{
+    margin: 0 1.8rem;
   }
